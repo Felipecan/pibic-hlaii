@@ -34,7 +34,7 @@ void VirtualBusFederate::writeData(unsigned src, unsigned addr, unsigned size, u
 	//advanceTime(fedamb->federateLookahead);
 
 	//Força o envio do source (src) como unsigned de valor 0, identificando assim que essa mensagem é do sender.
-	src = FPGA_ID;
+	// src = FPGA_ID;
 	updateAttributeValues(src, addr, size, data);
 }
 
@@ -145,7 +145,14 @@ void VirtualBusFederate::runFederate( char* federateName )
 	// announce a sync point to get everyone on the same page. if the point
 	// has already been registered, we'll get a callback saying it failed,
 	// but we don't care about that, as long as someone registered it
-	rtiamb->registerFederationSynchronizationPoint( READY_TO_RUN, "" );
+    if(strcmp( federateName, "2" ) == 0)
+    {
+	    rtiamb->registerFederationSynchronizationPoint( READY_TO_RUN, "" );
+    }
+    else
+    {
+        // rtiamb->registerFederationSynchronizationPoint( READY_TO_RUN, "" );
+    }
 	while( fedamb->isAnnounced == false )
 	{
 		rtiamb->tick();
@@ -156,6 +163,7 @@ void VirtualBusFederate::runFederate( char* federateName )
 	// So that there is time to add other federates, we will wait until the
 	// user hits enter before proceeding. That was, you have time to start
 	// other federates.
+
 	waitForUser();
 
 	///////////////////////////////////////////////////////

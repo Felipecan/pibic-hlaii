@@ -105,37 +105,47 @@ void ii_driver::drive()
     bool current_reset;
 
     while(true)
-    {
+    {            
+        INFO(name(), "WHILE", HIGH);  
+            std::cout << "WHILE" << std::endl;
+                
         current_reset = async_reset.read(); 
         if(current_reset == 0) 
-        {
-            drv_if->in_data_en.write(0);
+        {   
+            src = 0;
+            //drv_if->in_data_en.write(0);
             for(int i = 0; i < DATA_SIZE; i++) 
             {
-                drv_if->in_data[i].write(0);
+                //drv_if->in_data[i].write(0);
                 data[i] = 0;
-                federate->writeData(src, addr, size, data);
+            federate->writeData(src, addr, size, data);
             }
+            std::cout << "Writing data 1 " << src << std::endl;
+            federate->advanceTime(1.0);   
+            INFO(name(), "Saindo do reset", HIGH);          
         }
         else if(update_interface == 1)
         {
+            src = 0;
             //Drive into drive's interface
-            drv_if->in_data_en.write(ii_sqi->data_enable);
+            //drv_if->in_data_en.write(ii_sqi->data_enable);
 
             for(int i = 0; i < DATA_SIZE; i++) 
             {
-                drv_if->in_data[i].write(ii_sqi->data_in[i]);
+                //drv_if->in_data[i].write(ii_sqi->data_in[i]);
                 data[i] = ii_sqi->data_in[i];
-                federate->writeData(src, addr, size, data);
+                federate->writeData(src, addr, size, data);                 
             }
+            
             //save drive at each clock
             //file_h << drv_if->in_data_en << " " <<  drv_if->in_data_a << " " << drv_if->in_data_b << " " << drv_if->in_sel << endl;
 
             //send the data to checker
             drv_port.write(*ii_sqi);
             update_interface = 0;
-        }   
-        federate->advanceTime(1.0);
+            std::cout << "Writing data 2 " << src << std::endl;
+            federate->advanceTime(1.0);               
+        }           
         wait(1);
     }
 }

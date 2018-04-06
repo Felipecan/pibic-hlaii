@@ -43,6 +43,8 @@ SC_MODULE(ii_monitor)
     string fname_data_out;
     ofstream file_data_out;
 
+    unsigned readsrc;
+
     //-----------------------------
     // TLM Analysis Port
     //-----------------------------
@@ -87,17 +89,21 @@ SC_MODULE(ii_monitor)
 //! Check if reset happens, copy the DUT interface to a sequence item and 
 //! write it in the TLM port.
 //+--------------------------------------------------------------------------
-void ii_monitor::capture_signals(){
-  stringstream msg;  
-  while (true) {
-    if(!async_reset.read()){
-      wait(1, ASYNC_RST_TIMEUNIT);
+void ii_monitor::capture_signals()
+{
+    std::cout << "executing this method" << std::endl;
+    stringstream msg;  
+    while (true) 
+    {
+        if(!async_reset.read())
+        {
+            wait(1, ASYNC_RST_TIMEUNIT);
+        }
+        ii_monitor::copy_if_sqi();
+        ii_sqi_clone = ii_sqi;
+        mon_port.write(*ii_sqi_clone);
+        wait(1); 
     }
-    ii_monitor::copy_if_sqi();
-    ii_sqi_clone = ii_sqi;
-    mon_port.write(*ii_sqi_clone);
-    wait(1); 
-  }
 }
 
 //+--------------------------------------------------------------------------
@@ -109,25 +115,41 @@ void ii_monitor::copy_if_sqi()
 {
     stringstream msg;
 
-    ii_sqi->data_valid  = ii_if->out_data_valid.read();
-    for(int i = 0; i < DATA_SIZE; i++) 
-    {
-        ii_sqi->data_out[i] = ii_if->out_data[i].read();
-        msg << "Read: out_data = " << ii_sqi->data_out[i];
-        INFO(name(), msg.str().c_str(), HIGH);
-        msg.str(""); //clean
-    }
-
-    // if(federate->readData(src, addr, size, data))
+    // ii_sqi->data_valid  = ii_if->out_data_valid.read();
+    // for(int i = 0; i < DATA_SIZE; i++) 
     // {
-    //     for(int i = 0; i < DATA_SIZE; i++) 
-    //     {
-    //         ii_sqi->data_out[i] = data[i]; // ?
-    //         msg << "Read: out_data = " << ii_sqi->data_out[i];
-    //         INFO(name(), msg.str().c_str(), HIGH);
-    //         msg.str(""); //clean
-    //     }
+    //     ii_sqi->data_out[i] = ii_if->out_data[i].read();
+    //     msg << "Read: out_data = " << ii_sqi->data_out[i];
+    //     INFO(name(), msg.str().c_str(), HIGH);
+    //     msg.str(""); //clean
     // }
+
+    if(federate->readData(src, addr, size, data))
+    {
+        if(src == readsrc)
+        {
+            for(int i = 0; i < DATA_SIZE; i++) 
+            {
+                std::cout << "data from src " << src << std::endl;
+                ii_sqi->data_out[i] = data[i]; // ?
+                msg << "Read: out_data = " << ii_sqi->data_out[i];
+                INFO(name(), msg.str().c_str(), HIGH);
+                msg.str(""); //clean
+            }
+        }
+        else
+        {
+                msg << "data from src " << src;
+                INFO(name(), msg.str().c_str(), HIGH);
+                msg.str(""); //clean
+        }
+        // federate->advanceTime(1.0);
+        for(int i = 0; i < DATA_SIZE; i++)
+        {
+            file_data_out << data[i] << " ";
+        }
+        file_data_out << std::endl;
+    }
 
 
   //save output data

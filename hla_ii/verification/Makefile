@@ -36,7 +36,7 @@ endif
 
 #REFERENCE MODEL
 PATH_RM = $(BLOCK_PATH)/reference_model
-ARCH_RM = $(PATH_RM)/rm_ii.cpp 
+#ARCH_RM = $(PATH_RM)/rm_ii.cpp 
 
 #DUT
 PATH_DUT = $(BLOCK_PATH)/design

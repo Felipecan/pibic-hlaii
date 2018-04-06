@@ -23,7 +23,7 @@ int main( int argc, char **argv )
 	// check to see if we have a federate name
 	//strcpy(federateName, "FPGAFederate");
 	//sprintf(federateName, "%d", FPGA_ID);
-	sprintf(federateName, "%d", 2);
+	sprintf(federateName, "%d", 1);
 	//	if( argc > 1 )
 	//		strcpy(federateName,argv[1]);
 
@@ -33,77 +33,90 @@ int main( int argc, char **argv )
 	federate->runFederate( federateName );
 
 	//Data to receive
-	unsigned src=1;
+    unsigned src=1;
 	unsigned addr = 1;
+    unsigned readsrc;
+    unsigned cntrl_write;
+	
 	int a[IMAGE_HEIGHT][IMAGE_WIDTH];
 
 	while(1)
 	{
-		if(federate->readData(src,addr,size, data))
+		if(federate->readData(readsrc,addr,size, data))
 		{
-			for (size_t i = 0; i < VIRTUALBUS_SIZE; i++) 
-			{
-				printf("%d ", data[i]);
-			}
-			printf("\n");
-	        //for(int aux = 0; aux < 16; aux++) std::cout << "data[" << aux << "] " << data[aux] << std::endl;
-			//send data by HLA
-			addr = SENDER_ID; //Sender address
-			a[0][0] = data[0];
-			a[0][1] = data[1] ;
-			a[0][2] = data[2] ;
-			a[0][3] = data[3] ;
-			a[1][0] = data[4] ;
-			a[1][1] = data[5] ;
-			a[1][2] = data[6] ;
-			a[1][3] = data[7] ;
-			a[2][0] = data[8] ;
-			a[2][1] = data[9] ;
-			a[2][2] = data[10];
-			a[2][3] = data[11];
-			a[3][0] = data[12];
-			a[3][1] = data[13];
-			a[3][2] = data[14];
-			a[3][3] = data[15];
-			
-				          //First compute the first horizontal line
-			for(int j = 1; j < IMAGE_WIDTH; j++)
-				a[0][j] += a[0][j-1];
+            std::cout << "Leu o if " << readsrc << std::endl;
+            if(readsrc == 0)
+            {                
+                std::cout << "data from src " << src << std::endl;
+                for (size_t i = 0; i < VIRTUALBUS_SIZE; i++) 
+                {
+                    printf("%d ", data[i]);
+                }
+                printf("\n");
+                //for(int aux = 0; aux < 16; aux++) std::cout << "data[" << aux << "] " << data[aux] << std::endl;
+                //send data by HLA
+                addr = SENDER_ID; //Sender address
+                a[0][0] = data[0];
+                a[0][1] = data[1] ;
+                a[0][2] = data[2] ;
+                a[0][3] = data[3] ;
+                a[1][0] = data[4] ;
+                a[1][1] = data[5] ;
+                a[1][2] = data[6] ;
+                a[1][3] = data[7] ;
+                a[2][0] = data[8] ;
+                a[2][1] = data[9] ;
+                a[2][2] = data[10];
+                a[2][3] = data[11];
+                a[3][0] = data[12];
+                a[3][1] = data[13];
+                a[3][2] = data[14];
+                a[3][3] = data[15];
+                
+                            //First compute the first horizontal line
+                for(int j = 1; j < IMAGE_WIDTH; j++)
+                    a[0][j] += a[0][j-1];
 
-				          //Then compute the first vertical line
-			for(int i = 1; i < IMAGE_HEIGHT; i++)
-				a[i][0] += a[i-1][0];
+                            //Then compute the first vertical line
+                for(int i = 1; i < IMAGE_HEIGHT; i++)
+                    a[i][0] += a[i-1][0];
 
-				          //And finally compute the rest of the values
-			for(int i = 1; i < IMAGE_HEIGHT; i++)
-				for(int j = 1; j < IMAGE_WIDTH; j++)
-					a[i][j] += a[i-1][j]+a[i][j-1]-a[i-1][j-1];
+                            //And finally compute the rest of the values
+                for(int i = 1; i < IMAGE_HEIGHT; i++)
+                    for(int j = 1; j < IMAGE_WIDTH; j++)
+                        a[i][j] += a[i-1][j]+a[i][j-1]-a[i-1][j-1];
 
 
-			data[0]  = a[0][0];
-			data[1]  = a[0][1];
-			data[2]  = a[0][2];
-			data[3]  = a[0][3];
-			data[4]  = a[1][0];
-			data[5]  = a[1][1];
-			data[6]  = a[1][2];
-			data[7]  = a[1][3];
-			data[8]  = a[2][0];
-			data[9]  = a[2][1];
-			data[10] = a[2][2];
-			data[11] = a[2][3];
-			data[12] = a[3][0];
-			data[13] = a[3][1];
-			data[14] = a[3][2];
-			data[15] = a[3][3];
-			federate->writeData(src, addr, size,  data);
-			for(int aux = 0; aux < 16; aux++) 
-				std::cout << "data[" << aux << "] " << data[aux] << std::endl;
+                data[0]  = 9999;//a[0][0];
+                data[1]  = a[0][1];
+                data[2]  = a[0][2];
+                data[3]  = a[0][3];
+                data[4]  = a[1][0];
+                data[5]  = a[1][1];
+                data[6]  = a[1][2];
+                data[7]  = a[1][3];
+                data[8]  = a[2][0];
+                data[9]  = a[2][1];
+                data[10] = a[2][2];
+                data[11] = a[2][3];
+                data[12] = a[3][0];
+                data[13] = a[3][1];
+                data[14] = a[3][2];
+                data[15] = a[3][3];
+                src = 1;
+                // while(cntrl_write)
+                // {
+                    
+                // }
+                federate->writeData(src, addr, size,  data);
+                for(int aux = 0; aux < 16; aux++) 
+                    std::cout << "data[" << aux << "] " << data[aux] << std::endl;
+            }   
+	    }
+	    else{}
+                federate->advanceTime(1.0);
 
-	      }
-	  else{}
-
-	  	federate->advanceTime(1.0);
+	  	
 	}
 
 }

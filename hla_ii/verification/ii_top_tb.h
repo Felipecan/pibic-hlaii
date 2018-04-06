@@ -9,7 +9,7 @@ SC_MODULE(ii_top_tb) {
 
     // DUT Module
     //ii    DUT;
-    rm_ii RM;
+    //rm_ii RM;
 
     // Test Module
     ii_test *test;
@@ -24,7 +24,7 @@ SC_MODULE(ii_top_tb) {
 
      ii_top_tb(sc_module_name name, string _testname, string _trace_fname, test_config* tst_cfg)
    : //DUT("DUT"),
-     RM("RM"),
+     //RM("RM"),
      sc_module(name)
    {
     // Interface
@@ -53,17 +53,17 @@ SC_MODULE(ii_top_tb) {
     // Reference Module
     //-----------------------------
     //Input signals
-    RM.clock   (rst_if->clk);          
-    RM.reset_n (rst_if->reset_n);
+    // RM.clock   (rst_if->clk);          
+    // RM.reset_n (rst_if->reset_n);
 
-    RM.in_data_en  (ii_if->in_data_en);
-       for(int i = 0; i < DATA_SIZE; i++)
-           RM.in_data[i](ii_if->in_data[i]);
+    // RM.in_data_en  (ii_if->in_data_en);
+    //    for(int i = 0; i < DATA_SIZE; i++)
+    //        RM.in_data[i](ii_if->in_data[i]);
 
-       //Output signals
-       for(int i = 0; i < DATA_SIZE; i++)
-           RM.out_data[i](rm_out_if->out_data[i]);
-    RM.out_data_valid(rm_out_if->out_data_valid);
+    //    //Output signals
+    //    for(int i = 0; i < DATA_SIZE; i++)
+    //        RM.out_data[i](rm_out_if->out_data[i]);
+    // RM.out_data_valid(rm_out_if->out_data_valid);
 
     //-----------------------------
     // Test Module
