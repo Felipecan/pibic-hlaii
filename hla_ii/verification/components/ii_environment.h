@@ -7,9 +7,16 @@
 #include <ii_rst_interface.h>
 #include <ii_rst.h>
 
+#include "VirtualBusFederate.h"
+
 SC_MODULE(ii_environment)
 {
   public:
+
+    VirtualBusFederate *federate;
+    unsigned src=0;
+    unsigned addr;
+    unsigned int size, data[16];
  
     //+--------------------------------------------------------------------------
     //| Components Members
@@ -40,32 +47,38 @@ SC_MODULE(ii_environment)
                           ii_interface*     ii_vif, 
                           ii_interface*     ii_rm_vif): sc_module(name)
     {
-      INFO(this->name(), "constructor");
+        INFO(this->name(), "constructor");
 
-      ii_reset = new ii_rst("ii_reset", sc_rst_if);
-      ii_reset->clock(sc_rst_if->clk);
-      ii_reset->clock2(sc_rst_if->clk2);
-       
-      ii_drv = new ii_driver("ii_drv",ii_vif);
-      ii_drv->clk(sc_rst_if->clk);
-      ii_drv->async_reset(sc_rst_if->reset_n);
+        federate = new VirtualBusFederate();
+        federate->runFederate("Env");
 
-      ii_dut_mon = new ii_monitor("ii_dut_mon",ii_vif);  
-      ii_dut_mon->clk(sc_rst_if->clk);
-      ii_dut_mon->async_reset(sc_rst_if->reset_n);
+        ii_reset = new ii_rst("ii_reset", sc_rst_if);
+        ii_reset->clock(sc_rst_if->clk);
+        ii_reset->clock2(sc_rst_if->clk2);
+        
+        ii_drv = new ii_driver("ii_drv",ii_vif);
+        ii_drv->clk(sc_rst_if->clk);
+        ii_drv->async_reset(sc_rst_if->reset_n);
+        ii_drv->federate = federate;
 
-      ii_rm_mon = new ii_monitor("ii_rm_mon",ii_rm_vif);  
-      ii_rm_mon->clk(sc_rst_if->clk);
-      ii_rm_mon->async_reset(sc_rst_if->reset_n);
+        ii_dut_mon = new ii_monitor("ii_dut_mon",ii_vif);  
+        ii_dut_mon->clk(sc_rst_if->clk);
+        ii_dut_mon->async_reset(sc_rst_if->reset_n);
+        ii_dut_mon->federate = federate;
 
-      ii_chk = new ii_checker("ii_chk");
-      ii_chk->clk(sc_rst_if->clk);
-      ii_chk->clk2(sc_rst_if->clk2);
-      ii_chk->async_reset(sc_rst_if->reset_n);
+        ii_rm_mon = new ii_monitor("ii_rm_mon",ii_rm_vif);  
+        ii_rm_mon->clk(sc_rst_if->clk);
+        ii_rm_mon->async_reset(sc_rst_if->reset_n);
+        ii_rm_mon->federate = federate;
 
-      ii_drv->drv_port.bind(ii_chk->chk_drv_port);      
-      ii_dut_mon->mon_port.bind(ii_chk->chk_port);
-      ii_rm_mon->mon_port.bind(ii_chk->chk_rm_port);
+        ii_chk = new ii_checker("ii_chk");
+        ii_chk->clk(sc_rst_if->clk);
+        ii_chk->clk2(sc_rst_if->clk2);
+        ii_chk->async_reset(sc_rst_if->reset_n);
+
+        ii_drv->drv_port.bind(ii_chk->chk_drv_port);      
+        ii_dut_mon->mon_port.bind(ii_chk->chk_port);
+        ii_rm_mon->mon_port.bind(ii_chk->chk_rm_port);
     }
 
 };

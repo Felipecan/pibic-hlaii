@@ -14,8 +14,15 @@ using namespace tlm;
 #include <ii_rst_interface.h>
 #include <ii_sequence_item.h>
 
+#include "VirtualBusFederate.h"
+
 SC_MODULE(ii_driver)
 {
+
+    VirtualBusFederate *federate;
+    unsigned src=0;
+    unsigned addr;
+    unsigned int size, data[16];
 
     //-----------------------------
     // Input
@@ -94,33 +101,43 @@ void ii_driver::set_seed(int new_seed)
 //+--------------------------------------------------------------------------
 void ii_driver::drive()
 {
-  stringstream msg;
-  bool current_reset;
+    stringstream msg;
+    bool current_reset;
 
-  while(true){
-    current_reset = async_reset.read(); 
-    if(current_reset == 0) {
-        drv_if->in_data_en.write(0);
-        for(int i = 0; i < DATA_SIZE; i++) {
-            drv_if->in_data[i].write(0);
+    while(true)
+    {
+        current_reset = async_reset.read(); 
+        if(current_reset == 0) 
+        {
+            drv_if->in_data_en.write(0);
+            for(int i = 0; i < DATA_SIZE; i++) 
+            {
+                drv_if->in_data[i].write(0);
+                data[i] = 0;
+                federate->writeData(src, addr, size, data);
+            }
         }
+        else if(update_interface == 1)
+        {
+            //Drive into drive's interface
+            drv_if->in_data_en.write(ii_sqi->data_enable);
+
+            for(int i = 0; i < DATA_SIZE; i++) 
+            {
+                drv_if->in_data[i].write(ii_sqi->data_in[i]);
+                data[i] = ii_sqi->data_in[i];
+                federate->writeData(src, addr, size, data);
+            }
+            //save drive at each clock
+            //file_h << drv_if->in_data_en << " " <<  drv_if->in_data_a << " " << drv_if->in_data_b << " " << drv_if->in_sel << endl;
+
+            //send the data to checker
+            drv_port.write(*ii_sqi);
+            update_interface = 0;
+        }   
+        federate->advanceTime(1.0);
+        wait(1);
     }
-    else if(update_interface == 1){
-      //Drive into drive's interface
-      drv_if->in_data_en.write(ii_sqi->data_enable);
-
-      for(int i = 0; i < DATA_SIZE; i++) {
-          drv_if->in_data[i].write(ii_sqi->data_in[i]);
-      }
-      //save drive at each clock
-      //file_h << drv_if->in_data_en << " " <<  drv_if->in_data_a << " " << drv_if->in_data_b << " " << drv_if->in_sel << endl;
-
-      //send the data to checker
-      drv_port.write(*ii_sqi);
-      update_interface = 0;
-    }   
-    wait(1);
-  }
 }
 
 

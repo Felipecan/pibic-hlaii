@@ -35,7 +35,7 @@ int number_clock;
 // DUT Instantiation
 //-----------------------------
 
-#include <ii.h>
+//#include <ii.h>
 #include <rm_ii.h>
 
 //-----------------------------
@@ -99,7 +99,7 @@ int sc_main(int argc, char *argv[])
         {
           /* These options set a flag. */
        //   {"quiet", no_argument,       &quiet, 1},
-          /* These options don¿t set a flag.
+          /* These options donï¿½t set a flag.
              We distinguish them by their indices. */
           {"quiet",      no_argument,       0, 'q'},
           {"testname",   required_argument, 0, 't'},

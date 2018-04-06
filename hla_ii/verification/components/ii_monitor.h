@@ -8,6 +8,8 @@
 #include <string>
 #include "tlm.h"
 
+#include "VirtualBusFederate.h"
+
 using namespace std;
 using namespace tlm;
 
@@ -21,6 +23,12 @@ using namespace tlm;
 
 SC_MODULE(ii_monitor)
 {
+
+    VirtualBusFederate *federate;
+    unsigned src=0;
+    unsigned addr;
+    unsigned int size, data[16];
+
     //-----------------------------
     // Input
     //-----------------------------
@@ -63,7 +71,7 @@ SC_MODULE(ii_monitor)
         ii_sqi = new ii_sequence_item("ii_sqi");
         ii_sqi_clone = new ii_sequence_item("ii_sqi_clone"); //Necessary to avoid overwrite
 	
-	ii_if = sc_if;
+	    ii_if = sc_if;
         //----------------------------
         // Process registration
         //----------------------------
@@ -97,16 +105,30 @@ void ii_monitor::capture_signals(){
 //+--------------------------------------------------------------------------
 //! Copy interface signals to sequence item
 //+--------------------------------------------------------------------------
-void ii_monitor::copy_if_sqi(){
+void ii_monitor::copy_if_sqi()
+{
     stringstream msg;
 
     ii_sqi->data_valid  = ii_if->out_data_valid.read();
-    for(int i = 0; i < DATA_SIZE; i++) {
+    for(int i = 0; i < DATA_SIZE; i++) 
+    {
         ii_sqi->data_out[i] = ii_if->out_data[i].read();
         msg << "Read: out_data = " << ii_sqi->data_out[i];
         INFO(name(), msg.str().c_str(), HIGH);
         msg.str(""); //clean
     }
+
+    // if(federate->readData(src, addr, size, data))
+    // {
+    //     for(int i = 0; i < DATA_SIZE; i++) 
+    //     {
+    //         ii_sqi->data_out[i] = data[i]; // ?
+    //         msg << "Read: out_data = " << ii_sqi->data_out[i];
+    //         INFO(name(), msg.str().c_str(), HIGH);
+    //         msg.str(""); //clean
+    //     }
+    // }
+
 
   //save output data
   //file_data_out << ii_if->out_data_rdy << " " << ii_if->out_data << " " << ii_if->out_carryout << endl;
