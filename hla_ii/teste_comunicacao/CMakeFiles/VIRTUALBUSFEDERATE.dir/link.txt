@@ -1,0 +1,2 @@
+/usr/bin/ar qc libVIRTUALBUSFEDERATE.a  CMakeFiles/VIRTUALBUSFEDERATE.dir/home/daniel/workspace/hla_ii/virtualbus/VirtualBusFederate.cpp.o
+/usr/bin/ranlib libVIRTUALBUSFEDERATE.a

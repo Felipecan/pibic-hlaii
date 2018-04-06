@@ -1,0 +1,16 @@
+		SC VERIFICATION
+		Tue May 23 16:07:27 2017
+
+INFO@0 s: [ii_test_random] Constructor
+INFO@0 s: [ii_test_random] Start Reset Phase
+INFO@10011 ns: [ii_test_random]                                           
+INFO@10011 ns: [ii_test_random] ########    #######     ######     ###### 
+INFO@10011 ns: [ii_test_random] ##     ##  ##     ##  ##     ##  ##     ##
+INFO@10011 ns: [ii_test_random] ##     ##  ##     ##  ##         ##       
+INFO@10011 ns: [ii_test_random] ########   #########    ######     ###### 
+INFO@10011 ns: [ii_test_random] ##         ##     ##         ##         ##
+INFO@10011 ns: [ii_test_random] ##         ##     ##  ##     ##  ##     ##
+INFO@10011 ns: [ii_test_random] ##         ##     ##    ######     ###### 
+INFO@10011 ns: [ii_test_random]                                           
+INFO@10011 ns: [ii_test_random] Simiition completed without errors!
+INFO@10011 ns: [ii_test_random] Start Finish Phase

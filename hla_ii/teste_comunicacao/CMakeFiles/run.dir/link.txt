@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/run.dir/main.cpp.o CMakeFiles/run.dir/home/daniel/workspace/hla_ii/virtualbus/FederateAmbassador.cpp.o CMakeFiles/run.dir/home/daniel/workspace/hla_ii/virtualbus/VirtualBusFederate.cpp.o  -o run -rdynamic 

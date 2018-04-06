@@ -1,0 +1,3 @@
+/home/daniel/workspace/hla_ii/teste_comunicacao/CMakeFiles/edit_cache.dir
+/home/daniel/workspace/hla_ii/teste_comunicacao/CMakeFiles/rebuild_cache.dir
+/home/daniel/workspace/hla_ii/teste_comunicacao/CMakeFiles/run.dir

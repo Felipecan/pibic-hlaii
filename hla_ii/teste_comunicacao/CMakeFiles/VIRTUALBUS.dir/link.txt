@@ -1,0 +1,2 @@
+/usr/bin/ar qc libVIRTUALBUS.a  CMakeFiles/VIRTUALBUS.dir/home/daniel/workspace/hla_ii/virtualbus/FederateAmbassador.cpp.o CMakeFiles/VIRTUALBUS.dir/home/daniel/workspace/hla_ii/virtualbus/VirtualBusFederate.cpp.o
+/usr/bin/ranlib libVIRTUALBUS.a
