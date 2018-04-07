@@ -33,14 +33,14 @@ int main( int argc, char **argv )
 	federate->runFederate( federateName );
 
 	//Data to receive
-	unsigned src=2;
-	unsigned addr = 1;
+	unsigned src;
+	unsigned addr;
 	int a[IMAGE_HEIGHT][IMAGE_WIDTH];
     unsigned readsrc;
     
 
 	while(1)
-	{
+	{        
 		if(federate->readData(readsrc,addr,size, data))
 		{
             std::cout << "Leu o if " << readsrc << std::endl;
@@ -86,7 +86,7 @@ int main( int argc, char **argv )
                         a[i][j] += a[i-1][j]+a[i][j-1]-a[i-1][j-1];
 
 
-                data[0]  = a[0][0];
+                data[0]  = 6666;//a[0][0];
                 data[1]  = a[0][1];
                 data[2]  = a[0][2];
                 data[3]  = a[0][3];
@@ -110,9 +110,9 @@ int main( int argc, char **argv )
             }
 
 	    }
-	    else{std::cout << "Não leu o if" << std::endl;}
-                federate->advanceTime(1.0);
-                std::cout << "Saiu do advancetime" << std::endl;
+	    else{}
+        federate->advanceTime(1.0);
+        // std::cout << "Saiu do advancetime" << std::endl;
 
 	  	
 	}

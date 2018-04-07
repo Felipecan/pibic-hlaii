@@ -8,16 +8,19 @@
 #include <ii_rst.h>
 
 #include "VirtualBusFederate.h"
+#include <string.h>
+
 
 SC_MODULE(ii_environment)
 {
   public:
 
     VirtualBusFederate *federate;
-    unsigned src=0;
+    unsigned src;
     unsigned addr;
     unsigned int size, data[16];
- 
+    char* federateName = "Env";        
+    
     //+--------------------------------------------------------------------------
     //| Components Members
     //+--------------------------------------------------------------------------
@@ -50,7 +53,7 @@ SC_MODULE(ii_environment)
         INFO(this->name(), "constructor");
 
         federate = new VirtualBusFederate();
-        federate->runFederate("Env");
+        federate->runFederate(federateName);
 
         ii_reset = new ii_rst("ii_reset", sc_rst_if);
         ii_reset->clock(sc_rst_if->clk);

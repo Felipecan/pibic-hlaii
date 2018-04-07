@@ -33,8 +33,8 @@ int main( int argc, char **argv )
 	federate->runFederate( federateName );
 
 	//Data to receive
-    unsigned src=1;
-	unsigned addr = 1;
+    unsigned src;
+	unsigned addr;
     unsigned readsrc;
     unsigned cntrl_write;
 	
@@ -114,7 +114,7 @@ int main( int argc, char **argv )
             }   
 	    }
 	    else{}
-                federate->advanceTime(1.0);
+        federate->advanceTime(1.0);
 
 	  	
 	}

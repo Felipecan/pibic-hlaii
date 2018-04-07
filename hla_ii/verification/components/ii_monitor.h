@@ -25,9 +25,10 @@ SC_MODULE(ii_monitor)
 {
 
     VirtualBusFederate *federate;
-    unsigned src=0;
+    unsigned src;
     unsigned addr;
     unsigned int size, data[16];
+    unsigned readsrc;
 
     //-----------------------------
     // Input
@@ -41,9 +42,7 @@ SC_MODULE(ii_monitor)
 
     int monitor_errors;
     string fname_data_out;
-    ofstream file_data_out;
-
-    unsigned readsrc;
+    ofstream file_data_out;    
 
     //-----------------------------
     // TLM Analysis Port
@@ -91,7 +90,7 @@ SC_MODULE(ii_monitor)
 //+--------------------------------------------------------------------------
 void ii_monitor::capture_signals()
 {
-    std::cout << "executing this method" << std::endl;
+    //std::cout << "executing this method" << std::endl;
     stringstream msg;  
     while (true) 
     {
@@ -128,27 +127,30 @@ void ii_monitor::copy_if_sqi()
     {
         if(src == readsrc)
         {
+            msg << "data from src " << src;
+            INFO(name(), msg.str().c_str(), HIGH);
+            msg.str(""); //clean
+
             for(int i = 0; i < DATA_SIZE; i++) 
-            {
-                std::cout << "data from src " << src << std::endl;
+            {                
                 ii_sqi->data_out[i] = data[i]; // ?
-                msg << "Read: out_data = " << ii_sqi->data_out[i];
+                msg << "Read: out_data " << i << " = " << ii_sqi->data_out[i];
                 INFO(name(), msg.str().c_str(), HIGH);
                 msg.str(""); //clean
+
+                file_data_out << data[i] << " ";
             }
+
+            file_data_out << std::endl;
         }
         else
         {
-                msg << "data from src " << src;
-                INFO(name(), msg.str().c_str(), HIGH);
-                msg.str(""); //clean
+            msg << "data from src " << src;
+            INFO(name(), msg.str().c_str(), HIGH);
+            msg.str(""); //clean
         }
         // federate->advanceTime(1.0);
-        for(int i = 0; i < DATA_SIZE; i++)
-        {
-            file_data_out << data[i] << " ";
-        }
-        file_data_out << std::endl;
+        
     }
 
 
