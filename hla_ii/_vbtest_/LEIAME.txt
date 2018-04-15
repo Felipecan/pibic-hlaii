@@ -1,0 +1,38 @@
+Antes de tudo, instale o CERTI e descompacte o arquivo deste projeto.
+
+1) Copie o conteudo desta pasta para o diretório "test" do CERTI
+2) Dentro do diretório "test" edite o arquivo CMakeLists.txt para que ele fique assim:
+
+add_subdirectory(libgraphc)
+add_subdirectory(Billard)
+add_subdirectory(utility)
+add_subdirectory(testFederate)
+add_subdirectory(meuExemplo)
+
+
+
+# Do not compile this on Win32 (not very useful)
+if (NOT WIN32)
+   if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+      set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/certiCheckHostAndIP.c PROPERTIES COMPILE_DEFINITIONS "LINUX")
+   endif()
+   add_executable(CertiCheckHostAndIP certiCheckHostAndIP.c)
+   install(TARGETS CertiCheckHostAndIP
+           RUNTIME DESTINATION bin
+           LIBRARY DESTINATION lib
+           ARCHIVE DESTINATION lib)
+endif(NOT WIN32)
+
+add_subdirectory(meuExemplo)
+
+
+3) Para compilar o exemplo (e sempre que fizer uma modificação nele) entre no diretório "test" e digite: make
+
+4) Para executar, abra 3 terminais. Em um deles inicie o RTIG (rtig) e nos outros faça:
+
+Terminal2> ./exemplo saida1
+Terminal3> ./exemplo saida2
+
+5) Aperte ENTER em cada terminal para libera-los. Ao final da execução, cada Federate vai salvar os dados recebidos em um arquivo, ou seja: saida1.txt e saida2.txt
+
+

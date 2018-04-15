@@ -1,7 +1,7 @@
 		SC VERIFICATION
-		Fri Apr  6 15:33:12 2018
+		Sun Apr 15 05:04:49 2018
 
-INFO@0 s: [main] Running command line: ./run_verification -t ii_test_fixed -n 1000 -v HIGH 
+INFO@0 s: [main] Running command line: ./run_verification -t ii_test_fixed -n 100000 -v HIGH 
 INFO@0 s: [ii_test_fixed] Constructor
 INFO@0 s: [ii_top_tb.ii_env] constructor
 INFO@0 s: [ii_top_tb.ii_env.ii_drv] construtor
@@ -10,30 +10,64 @@ INFO@0 s: [ii_top_tb.ii_env.ii_rm_mon] construtor
 INFO@0 s: [ii_top_tb.ii_env.ii_chk] constructor
 INFO@0 s: [ii_test_fixed] Start Reset Phase
 INFO@0 s: [ii_top_tb.ii_env.ii_reset] Asserting async reset signal....
-INFO@0 s: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@0 s: [ii_top_tb.ii_env.ii_drv] Saindo do reset
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] data from src 2
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 0 = 6666
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 1 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 2 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 3 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 4 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 5 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 6 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 7 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 8 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 9 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 10 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 11 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 12 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 13 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 14 = 0
+INFO@1 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 15 = 0
 INFO@2 ps: [ii_top_tb.ii_env.ii_reset] Reset signal detected....
-INFO@502 ps: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@502 ps: [ii_top_tb.ii_env.ii_drv] Saindo do reset
-INFO@1 ns: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@1 ns: [ii_top_tb.ii_env.ii_drv] Saindo do reset
-INFO@2 ns: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@3 ns: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@4 ns: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@5 ns: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@6 ns: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@7 ns: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@8 ns: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@9 ns: [ii_top_tb.ii_env.ii_drv] WHILE
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] data from src 2
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 0 = 6666
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 1 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 2 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 3 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 4 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 5 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 6 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 7 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 8 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 9 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 10 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 11 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 12 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 13 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 14 = 0
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 15 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] data from src 2
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 0 = 6666
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 1 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 2 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 3 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 4 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 5 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 6 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 7 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 8 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 9 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 10 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 11 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 12 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 13 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 14 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 15 = 0
 INFO@10 ns: [ii_test_fixed] Configure Phase
 INFO@10 ns: [ii_test_fixed]  Starting test...
 INFO@10 ns: [ii_test_fixed]  Set seed
 INFO@10 ns: [ii_test_fixed]  Send the fixed array
 INFO@10 ns: [ii_test_fixed]  Finished test!!!
-INFO@10 ns: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@11 ns: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@12 ns: [ii_top_tb.ii_env.ii_drv] WHILE
-INFO@13 ns: [ii_top_tb.ii_env.ii_drv] WHILE
+INFO@12 ns: [ii_top_tb.ii_env.ii_dut_mon] data from src 2
 INFO@14 ns: [ii_test_fixed]                                           
 INFO@14 ns: [ii_test_fixed] ########    #######     ######     ###### 
 INFO@14 ns: [ii_test_fixed] ##     ##  ##     ##  ##     ##  ##     ##
@@ -45,4 +79,20 @@ INFO@14 ns: [ii_test_fixed] ##         ##     ##    ######     ######
 INFO@14 ns: [ii_test_fixed]                                           
 INFO@14 ns: [ii_test_fixed] Simiition completed without errors!
 INFO@14 ns: [ii_test_fixed] Start Finish Phase
-INFO@14 ns: [ii_top_tb.ii_env.ii_drv] WHILE
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] data from src 1
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 0 = 9999
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 1 = 1
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 2 = 3
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 3 = 6
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 4 = 4
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 5 = 10
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 6 = 18
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 7 = 28
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 8 = 12
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 9 = 27
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 10 = 45
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 11 = 66
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 12 = 24
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 13 = 52
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 14 = 84
+INFO@14 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 15 = 120

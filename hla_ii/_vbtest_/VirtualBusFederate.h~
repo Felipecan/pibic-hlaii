@@ -1,0 +1,79 @@
+#ifndef ARMVirtualBusFederate_H_
+#define ARMVirtualBusFederate_H_
+
+#include "FederateAmbassador.h"
+#include "RTI.hh"
+
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/opencv.hpp>
+
+#include "opencv2/highgui.hpp"
+#include "opencv2/core.hpp"
+#include <highgui.h> 
+#include "opencv2/objdetect.hpp"
+#include "opencv2/imgproc.hpp"
+#include <cv.h>
+#include <iostream>
+#include <string>
+#include <stdio.h>
+#include <stdlib.h>
+
+
+#define READY_TO_RUN "ReadyToRun"
+
+class VirtualBusFederate
+{
+	public:
+		RTI::RTIambassador *rtiamb;
+		FederateAmbassador      *fedamb;
+		char federateName[12];
+
+		// fom handles //
+		RTI::ObjectHandle      	    oHandle;		
+		RTI::ObjectClassHandle      aHandle;
+		RTI::AttributeHandle        srcHandle;
+		RTI::AttributeHandle        addrHandle;
+		RTI::AttributeHandle        sizeHandle;
+		RTI::AttributeHandle        data1Handle;
+		RTI::AttributeHandle        data2Handle;
+		RTI::AttributeHandle        data3Handle;		
+		RTI::AttributeHandle        data4Handle;
+		
+		
+
+		// public methods //
+		VirtualBusFederate();
+		virtual ~VirtualBusFederate();
+		void runFederate( char* federateName );
+		void loop(int iteracoes);
+		void finalize();
+
+
+		void writeData(unsigned src, unsigned addr, unsigned size, unsigned data1, unsigned data2, unsigned data3, unsigned data4);
+		
+		bool readData(unsigned& src, unsigned& addr, unsigned& size, unsigned& data1, unsigned& data2, unsigned& data3, unsigned& data4);
+		
+		bool hasReceivedData();
+		
+		void advanceTime( double timestep );
+
+	private:
+
+		bool receivedData;
+	
+		
+		void initializeHandles();
+		void waitForUser();
+		void enableTimePolicy();
+		void publishAndSubscribe();
+		RTI::ObjectHandle registerObject();
+		void updateAttributeValues(unsigned src, unsigned addr, unsigned size, unsigned data1, unsigned data2, unsigned data3, unsigned data4);
+		void sendInteraction();
+		
+		void deleteObject( RTI::ObjectHandle objectHandle );
+		double getLbts();
+		double getCurrentTime();
+};
+
+#endif /*ARMVirtualBusFederate_H_*/

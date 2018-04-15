@@ -1,0 +1,24 @@
+#include <string.h>
+#include "VirtualBusFederate.h"
+
+int main( int argc, char *argv[] )
+{
+	char federateName[20];
+	// check to see if we have a federate name
+	strcpy(federateName, "HostFederate2");
+	if( argc > 1 )
+		strcpy(federateName,argv[1]);
+	
+	
+	// create and run the federate
+	VirtualBusFederate *federate;
+	federate = new VirtualBusFederate();
+	federate->runFederate( federateName );
+
+	federate->loop(0);
+	federate->finalize();
+
+	// clean up
+	delete federate;
+	return 0;
+}

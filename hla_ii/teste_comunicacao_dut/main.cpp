@@ -42,12 +42,12 @@ int main( int argc, char **argv )
 
 	while(1)
 	{
-		if(federate->readData(readsrc,addr,size, data))
+		if(federate->readData(readsrc, addr, size, data))
 		{
-            std::cout << "Leu o if " << readsrc << std::endl;
+            //std::cout << "Leu o if " << readsrc << std::endl;
             if(readsrc == 0)
-            {                
-                std::cout << "data from src " << src << std::endl;
+            {                   
+                std::cout << "data from src " << readsrc << std::endl;
                 for (size_t i = 0; i < VIRTUALBUS_SIZE; i++) 
                 {
                     printf("%d ", data[i]);
@@ -103,11 +103,9 @@ int main( int argc, char **argv )
                 data[13] = a[3][1];
                 data[14] = a[3][2];
                 data[15] = a[3][3];
+
                 src = 1;
-                // while(cntrl_write)
-                // {
-                    
-                // }
+
                 federate->writeData(src, addr, size,  data);
                 for(int aux = 0; aux < 16; aux++) 
                     std::cout << "data[" << aux << "] " << data[aux] << std::endl;

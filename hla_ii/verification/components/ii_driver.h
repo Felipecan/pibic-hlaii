@@ -23,7 +23,9 @@ SC_MODULE(ii_driver)
     unsigned src;
     unsigned addr;
     unsigned int size, data[16];
-
+    unsigned cntrl_write;
+    bool first;
+    
     //-----------------------------
     // Input
     //-----------------------------
@@ -119,9 +121,10 @@ void ii_driver::drive()
                 //drv_if->in_data[i].write(0);
                 data[i] = 0;                
             }
+
             federate->writeData(src, addr, size, data);
             //std::cout << "Writing data 1 " << src << std::endl;
-            federate->advanceTime(1.0);   
+            //federate->advanceTime(1.0);   
             //INFO(name(), "Saindo do reset", HIGH);          
         }
         else if(update_interface == 1)
@@ -135,6 +138,7 @@ void ii_driver::drive()
                 //drv_if->in_data[i].write(ii_sqi->data_in[i]);
                 data[i] = ii_sqi->data_in[i];                
             }
+
             federate->writeData(src, addr, size, data);
             //save drive at each clock
             //file_h << drv_if->in_data_en << " " <<  drv_if->in_data_a << " " << drv_if->in_data_b << " " << drv_if->in_sel << endl;
@@ -143,8 +147,9 @@ void ii_driver::drive()
             drv_port.write(*ii_sqi);
             update_interface = 0;
             //std::cout << "Writing data 2 " << src << std::endl;
-            federate->advanceTime(1.0);               
-        }           
+            // federate->advanceTime(1.0);               
+        }
+        federate->advanceTime(1.0);              
         wait(1);
     }
 }

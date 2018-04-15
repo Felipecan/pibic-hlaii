@@ -1,0 +1,26 @@
+(FED
+  (Federation TestFed)
+  (FEDversion v1.3)
+  (spaces
+  )
+  (objects
+    (class VirtualBus
+      (attribute privilegeToDelete reliable timestamp)
+      (class RTIprivate)
+      (class dut
+        (attribute source reliable timestamp)        
+        (attribute address reliable timestamp)
+        (attribute size reliable timestamp)
+        
+      )     
+      (class refmod
+        (attribute source reliable timestamp)        
+        (attribute address reliable timestamp)
+        (attribute size reliable timestamp)       
+        
+      )
+    )
+  )
+  (interactions
+  )
+)

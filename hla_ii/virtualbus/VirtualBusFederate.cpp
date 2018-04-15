@@ -48,6 +48,7 @@ bool VirtualBusFederate::readData(unsigned& source, unsigned& addr, unsigned& si
 		return false;
 }
 
+
 bool VirtualBusFederate::hasReceivedData(){
 	return receivedData;
 }
@@ -68,7 +69,7 @@ void VirtualBusFederate::loop (int iteracoes){
 		
 		cout << "Sending data... "  << endl;
 	
-		writeData((unsigned)federateName[0], address, size, data);
+		//writeData((unsigned)federateName[0], address, size, data);
 		
 		
 		cout << "Data sent... "  << endl;
@@ -145,14 +146,15 @@ void VirtualBusFederate::runFederate( char* federateName )
 	// announce a sync point to get everyone on the same page. if the point
 	// has already been registered, we'll get a callback saying it failed,
 	// but we don't care about that, as long as someone registered it
-    if(strcmp( federateName, "2" ) == 0)
-    {
-	    rtiamb->registerFederationSynchronizationPoint( READY_TO_RUN, "" );
-    }
-    else
-    {
-        // rtiamb->registerFederationSynchronizationPoint( READY_TO_RUN, "" );
-    }
+    // if(strcmp( federateName, "2" ) == 0)
+    // {
+	//     rtiamb->registerFederationSynchronizationPoint( READY_TO_RUN, "" );
+    // }
+    // else
+    // {
+    //     // rtiamb->registerFederationSynchronizationPoint( READY_TO_RUN, "" );
+    // }
+    rtiamb->registerFederationSynchronizationPoint( READY_TO_RUN, "" );
 	while( fedamb->isAnnounced == false )
 	{
 		rtiamb->tick();
@@ -183,7 +185,7 @@ void VirtualBusFederate::runFederate( char* federateName )
 	/////////////////////////////
 	// in this section we enable/disable all time policies
 	// note that this step is optional!
-	enableTimePolicy();
+	//enableTimePolicy();
 	cout << "Time Policy Enabled" << endl;
 
 	//////////////////////////////
@@ -197,9 +199,26 @@ void VirtualBusFederate::runFederate( char* federateName )
 	/////////////////////////////////////
 	// 8. register an object to update //
 	/////////////////////////////////////
-	oHandle = registerObject();
-	cout << "Registered Object, handle=" << oHandle << endl;
-
+    if(strcmp(federateName, "Env") == 0)
+    {
+	    oHandle_dut = registerObject("VirtualBus.dut");
+        oHandle_ref = registerObject("VirtualBus.refmod");
+	    cout << "Registered Object, handle=" << oHandle_dut << endl;
+        cout << "Registered Object, handle=" << oHandle_ref << endl;
+    }
+    else
+    {
+       if(strcmp(federateName, "1") == 0)
+       {
+           oHandle_dut = registerObject("VirtualBus.dut");
+           cout << "Registered Object, handle=" << oHandle_dut << endl;        
+       }
+       else
+       {
+           oHandle_ref = registerObject("VirtualBus.refmod");
+           cout << "Registered Object, handle=" << oHandle_ref << endl;
+       } 
+    }
 	
 
 
@@ -212,8 +231,10 @@ void VirtualBusFederate::finalize(){
 	//////////////////////////////////////
 	// 10. delete the object we created //
 	//////////////////////////////////////
-	deleteObject(oHandle);
-	cout << "Deleted Object, handle=" << oHandle << endl;
+	deleteObject(oHandle_dut);
+    deleteObject(oHandle_ref);
+	cout << "Deleted Object, handle=" << oHandle_dut << endl;
+    cout << "Deleted Object, handle=" << oHandle_ref << endl;
 
 	////////////////////////////////////
 	// 11. resign from the federation //
@@ -254,26 +275,100 @@ void VirtualBusFederate::finalize(){
  */
 void VirtualBusFederate::initializeHandles()
 {
-	this->aHandle  = rtiamb->getObjectClassHandle( "VirtualBus.port" );
-	this->srcHandle = rtiamb->getAttributeHandle( "source", aHandle );
-	this->addrHandle = rtiamb->getAttributeHandle( "address", aHandle );
-	this->sizeHandle = rtiamb->getAttributeHandle( "size", aHandle );
-	this->data0Handle = rtiamb->getAttributeHandle( "data0", aHandle );
-	this->data1Handle = rtiamb->getAttributeHandle( "data1", aHandle );
-	this->data2Handle = rtiamb->getAttributeHandle( "data2", aHandle );
-	this->data3Handle = rtiamb->getAttributeHandle( "data3", aHandle );
-	this->data4Handle = rtiamb->getAttributeHandle( "data4", aHandle );
-	this->data5Handle = rtiamb->getAttributeHandle( "data5", aHandle );
-	this->data6Handle = rtiamb->getAttributeHandle( "data6", aHandle );
-	this->data7Handle = rtiamb->getAttributeHandle( "data7", aHandle );
-	this->data8Handle = rtiamb->getAttributeHandle( "data8", aHandle );
-	this->data9Handle = rtiamb->getAttributeHandle( "data9", aHandle );
-	this->data10Handle = rtiamb->getAttributeHandle( "data10", aHandle );
-	this->data11Handle = rtiamb->getAttributeHandle( "data11", aHandle );
-	this->data12Handle = rtiamb->getAttributeHandle( "data12", aHandle );
-	this->data13Handle = rtiamb->getAttributeHandle( "data13", aHandle );
-	this->data14Handle = rtiamb->getAttributeHandle( "data14", aHandle );
-	this->data15Handle = rtiamb->getAttributeHandle( "data15", aHandle );
+    if(strcmp(federateName, "Env") == 0)
+    {
+	    this->aHandle_dut      = rtiamb->getObjectClassHandle( "VirtualBus.dut" );
+        this->srcHandle_dut    = rtiamb->getAttributeHandle( "source", aHandle_dut );
+        this->addrHandle_dut   = rtiamb->getAttributeHandle( "address", aHandle_dut );
+        this->sizeHandle_dut   = rtiamb->getAttributeHandle( "size", aHandle_dut );
+        this->data0Handle_dut  = rtiamb->getAttributeHandle( "data0", aHandle_dut );
+        this->data1Handle_dut  = rtiamb->getAttributeHandle( "data1", aHandle_dut );
+        this->data2Handle_dut  = rtiamb->getAttributeHandle( "data2", aHandle_dut );
+        this->data3Handle_dut  = rtiamb->getAttributeHandle( "data3", aHandle_dut );
+        this->data4Handle_dut  = rtiamb->getAttributeHandle( "data4", aHandle_dut );
+        this->data5Handle_dut  = rtiamb->getAttributeHandle( "data5", aHandle_dut );
+        this->data6Handle_dut  = rtiamb->getAttributeHandle( "data6", aHandle_dut );
+        this->data7Handle_dut  = rtiamb->getAttributeHandle( "data7", aHandle_dut );
+        this->data8Handle_dut  = rtiamb->getAttributeHandle( "data8", aHandle_dut );
+        this->data9Handle_dut  = rtiamb->getAttributeHandle( "data9", aHandle_dut );
+        this->data10Handle_dut = rtiamb->getAttributeHandle( "data10", aHandle_dut );
+        this->data11Handle_dut = rtiamb->getAttributeHandle( "data11", aHandle_dut );
+        this->data12Handle_dut = rtiamb->getAttributeHandle( "data12", aHandle_dut );
+        this->data13Handle_dut = rtiamb->getAttributeHandle( "data13", aHandle_dut );
+        this->data14Handle_dut = rtiamb->getAttributeHandle( "data14", aHandle_dut );
+        this->data15Handle_dut = rtiamb->getAttributeHandle( "data15", aHandle_dut ); 
+
+        this->aHandle_ref      = rtiamb->getObjectClassHandle( "VirtualBus.refmod" );
+        this->srcHandle_ref    = rtiamb->getAttributeHandle( "source", aHandle_ref  );
+        this->addrHandle_ref   = rtiamb->getAttributeHandle( "address", aHandle_ref  );
+        this->sizeHandle_ref  = rtiamb->getAttributeHandle( "size", aHandle_ref  );
+        this->data0Handle_ref  = rtiamb->getAttributeHandle( "data0", aHandle_ref  );
+        this->data1Handle_ref  = rtiamb->getAttributeHandle( "data1", aHandle_ref  );
+        this->data2Handle_ref = rtiamb->getAttributeHandle( "data2", aHandle_ref  );
+        this->data3Handle_ref  = rtiamb->getAttributeHandle( "data3", aHandle_ref  );
+        this->data4Handle_ref  = rtiamb->getAttributeHandle( "data4", aHandle_ref  );
+        this->data5Handle_ref  = rtiamb->getAttributeHandle( "data5", aHandle_ref  );
+        this->data6Handle_ref  = rtiamb->getAttributeHandle( "data6", aHandle_ref  );
+        this->data7Handle_ref  = rtiamb->getAttributeHandle( "data7", aHandle_ref  );
+        this->data8Handle_ref  = rtiamb->getAttributeHandle( "data8", aHandle_ref  );
+        this->data9Handle_ref = rtiamb->getAttributeHandle( "data9", aHandle_ref  );
+        this->data10Handle_ref = rtiamb->getAttributeHandle( "data10", aHandle_ref  );
+        this->data11Handle_ref = rtiamb->getAttributeHandle( "data11", aHandle_ref  );
+        this->data12Handle_ref= rtiamb->getAttributeHandle( "data12", aHandle_ref  );
+        this->data13Handle_ref = rtiamb->getAttributeHandle( "data13", aHandle_ref  );
+        this->data14Handle_ref = rtiamb->getAttributeHandle( "data14", aHandle_ref  );
+        this->data15Handle_ref = rtiamb->getAttributeHandle( "data15", aHandle_ref  ); 
+    }
+    else
+    {
+       if(strcmp(federateName, "1") == 0)
+       {
+            this->aHandle_dut      = rtiamb->getObjectClassHandle( "VirtualBus.dut" );
+            this->srcHandle_dut    = rtiamb->getAttributeHandle( "source", aHandle_dut );
+            this->addrHandle_dut   = rtiamb->getAttributeHandle( "address", aHandle_dut );
+            this->sizeHandle_dut   = rtiamb->getAttributeHandle( "size", aHandle_dut );
+            this->data0Handle_dut  = rtiamb->getAttributeHandle( "data0", aHandle_dut );
+            this->data1Handle_dut  = rtiamb->getAttributeHandle( "data1", aHandle_dut );
+            this->data2Handle_dut  = rtiamb->getAttributeHandle( "data2", aHandle_dut );
+            this->data3Handle_dut  = rtiamb->getAttributeHandle( "data3", aHandle_dut );
+            this->data4Handle_dut  = rtiamb->getAttributeHandle( "data4", aHandle_dut );
+            this->data5Handle_dut  = rtiamb->getAttributeHandle( "data5", aHandle_dut );
+            this->data6Handle_dut  = rtiamb->getAttributeHandle( "data6", aHandle_dut );
+            this->data7Handle_dut  = rtiamb->getAttributeHandle( "data7", aHandle_dut );
+            this->data8Handle_dut  = rtiamb->getAttributeHandle( "data8", aHandle_dut );
+            this->data9Handle_dut  = rtiamb->getAttributeHandle( "data9", aHandle_dut );
+            this->data10Handle_dut = rtiamb->getAttributeHandle( "data10", aHandle_dut );
+            this->data11Handle_dut = rtiamb->getAttributeHandle( "data11", aHandle_dut );
+            this->data12Handle_dut = rtiamb->getAttributeHandle( "data12", aHandle_dut );
+            this->data13Handle_dut = rtiamb->getAttributeHandle( "data13", aHandle_dut );
+            this->data14Handle_dut = rtiamb->getAttributeHandle( "data14", aHandle_dut );
+            this->data15Handle_dut = rtiamb->getAttributeHandle( "data15", aHandle_dut );        
+       }
+       else
+       {
+            this->aHandle_ref      = rtiamb->getObjectClassHandle( "VirtualBus.refmod" );
+            this->srcHandle_ref    = rtiamb->getAttributeHandle( "source", aHandle_ref  );
+            this->addrHandle_ref   = rtiamb->getAttributeHandle( "address", aHandle_ref  );
+            this->sizeHandle_ref  = rtiamb->getAttributeHandle( "size", aHandle_ref  );
+            this->data0Handle_ref  = rtiamb->getAttributeHandle( "data0", aHandle_ref  );
+            this->data1Handle_ref  = rtiamb->getAttributeHandle( "data1", aHandle_ref  );
+            this->data2Handle_ref = rtiamb->getAttributeHandle( "data2", aHandle_ref  );
+            this->data3Handle_ref  = rtiamb->getAttributeHandle( "data3", aHandle_ref  );
+            this->data4Handle_ref  = rtiamb->getAttributeHandle( "data4", aHandle_ref  );
+            this->data5Handle_ref  = rtiamb->getAttributeHandle( "data5", aHandle_ref  );
+            this->data6Handle_ref  = rtiamb->getAttributeHandle( "data6", aHandle_ref  );
+            this->data7Handle_ref  = rtiamb->getAttributeHandle( "data7", aHandle_ref  );
+            this->data8Handle_ref  = rtiamb->getAttributeHandle( "data8", aHandle_ref  );
+            this->data9Handle_ref = rtiamb->getAttributeHandle( "data9", aHandle_ref  );
+            this->data10Handle_ref = rtiamb->getAttributeHandle( "data10", aHandle_ref  );
+            this->data11Handle_ref = rtiamb->getAttributeHandle( "data11", aHandle_ref  );
+            this->data12Handle_ref = rtiamb->getAttributeHandle( "data12", aHandle_ref  );
+            this->data13Handle_ref = rtiamb->getAttributeHandle( "data13", aHandle_ref  );
+            this->data14Handle_ref = rtiamb->getAttributeHandle( "data14", aHandle_ref  );
+            this->data15Handle_ref = rtiamb->getAttributeHandle( "data15", aHandle_ref  ); 
+       } 
+    }
+	  
 	
 }
 
@@ -333,31 +428,130 @@ void VirtualBusFederate::publishAndSubscribe()
 	// that we intend to publish this information
 
 	// package the information into a handle set
-	RTI::AttributeHandleSet *attributes = RTI::AttributeHandleSetFactory::create( 19 );
+    if(strcmp(federateName, "Env") == 0)
+    {        
+	    RTI::AttributeHandleSet *attributes1 = RTI::AttributeHandleSetFactory::create( 20 );
+        RTI::AttributeHandleSet *attributes2 = RTI::AttributeHandleSetFactory::create( 20 );
+
+        attributes1->add( this->srcHandle_dut );
+        attributes1->add( this->addrHandle_dut );	
+        attributes1->add( this->sizeHandle_dut );
+        attributes1->add( this->data0Handle_dut );
+        attributes1->add( this->data1Handle_dut );
+        attributes1->add( this->data2Handle_dut );
+        attributes1->add( this->data3Handle_dut );
+        attributes1->add( this->data4Handle_dut );
+        attributes1->add( this->data5Handle_dut );
+        attributes1->add( this->data6Handle_dut );
+        attributes1->add( this->data7Handle_dut );
+        attributes1->add( this->data8Handle_dut );
+        attributes1->add( this->data9Handle_dut );
+        attributes1->add( this->data10Handle_dut );
+        attributes1->add( this->data11Handle_dut );
+        attributes1->add( this->data12Handle_dut );
+        attributes1->add( this->data13Handle_dut );
+        attributes1->add( this->data14Handle_dut );
+        attributes1->add( this->data15Handle_dut );
+
+        attributes2->add( this->srcHandle_ref );
+        attributes2->add( this->addrHandle_ref );	
+        attributes2->add( this->sizeHandle_ref );
+        attributes2->add( this->data0Handle_ref );
+        attributes2->add( this->data1Handle_ref );
+        attributes2->add( this->data2Handle_ref );
+        attributes2->add( this->data3Handle_ref );
+        attributes2->add( this->data4Handle_ref );
+        attributes2->add( this->data5Handle_ref );
+        attributes2->add( this->data6Handle_ref );
+        attributes2->add( this->data7Handle_ref );
+        attributes2->add( this->data8Handle_ref );
+        attributes2->add( this->data9Handle_ref );
+        attributes2->add( this->data10Handle_ref );
+        attributes2->add( this->data11Handle_ref );
+        attributes2->add( this->data12Handle_ref );
+        attributes2->add( this->data13Handle_ref );
+        attributes2->add( this->data14Handle_ref );
+        attributes2->add( this->data15Handle_ref );
+
+        rtiamb->publishObjectClass( this->aHandle_dut, *attributes1 );
+        rtiamb->publishObjectClass( this->aHandle_ref, *attributes2 );
+
+        rtiamb->subscribeObjectClassAttributes( this->aHandle_dut, *attributes1 );
+        rtiamb->subscribeObjectClassAttributes( this->aHandle_ref, *attributes2 );
+
+        delete attributes1;
+        delete attributes2;
+    }
+    else
+    {
+       if(strcmp(federateName, "1") == 0)
+       {           
+           RTI::AttributeHandleSet *attributes1 = RTI::AttributeHandleSetFactory::create( 20 );            
+
+           attributes1->add( this->srcHandle_dut );
+           attributes1->add( this->addrHandle_dut );	
+           attributes1->add( this->sizeHandle_dut );
+           attributes1->add( this->data0Handle_dut );
+           attributes1->add( this->data1Handle_dut );
+           attributes1->add( this->data2Handle_dut );
+           attributes1->add( this->data3Handle_dut );
+           attributes1->add( this->data4Handle_dut );
+           attributes1->add( this->data5Handle_dut );
+           attributes1->add( this->data6Handle_dut );
+           attributes1->add( this->data7Handle_dut );
+           attributes1->add( this->data8Handle_dut );
+           attributes1->add( this->data9Handle_dut );
+           attributes1->add( this->data10Handle_dut );
+           attributes1->add( this->data11Handle_dut );
+           attributes1->add( this->data12Handle_dut );
+           attributes1->add( this->data13Handle_dut );
+           attributes1->add( this->data14Handle_dut );
+           attributes1->add( this->data15Handle_dut );  
+
+           rtiamb->publishObjectClass( this->aHandle_dut, *attributes1 ); 
+           rtiamb->subscribeObjectClassAttributes( this->aHandle_dut, *attributes1 );  
+
+           delete attributes1;         
+                  
+       }
+       else
+       {
+           RTI::AttributeHandleSet *attributes2 = RTI::AttributeHandleSetFactory::create( 20 );
+
+           attributes2->add( this->srcHandle_ref );
+           attributes2->add( this->addrHandle_ref );	
+           attributes2->add( this->sizeHandle_ref );
+           attributes2->add( this->data0Handle_ref );
+           attributes2->add( this->data1Handle_ref );
+           attributes2->add( this->data2Handle_ref );
+           attributes2->add( this->data3Handle_ref );
+           attributes2->add( this->data4Handle_ref );
+           attributes2->add( this->data5Handle_ref );
+           attributes2->add( this->data6Handle_ref );
+           attributes2->add( this->data7Handle_ref );
+           attributes2->add( this->data8Handle_ref );
+           attributes2->add( this->data9Handle_ref );
+           attributes2->add( this->data10Handle_ref );
+           attributes2->add( this->data11Handle_ref );
+           attributes2->add( this->data12Handle_ref );
+           attributes2->add( this->data13Handle_ref );
+           attributes2->add( this->data14Handle_ref );
+           attributes2->add( this->data15Handle_ref );
+
+           rtiamb->publishObjectClass( this->aHandle_ref, *attributes2 );
+           rtiamb->subscribeObjectClassAttributes( this->aHandle_ref, *attributes2 );
+
+           delete attributes2;
+       } 
+    }
 	
-	attributes->add( this->srcHandle );
-	attributes->add( this->addrHandle );	
-	attributes->add( this->sizeHandle );
-	attributes->add( this->data0Handle );
-	attributes->add( this->data1Handle );
-	attributes->add( this->data2Handle );
-	attributes->add( this->data3Handle );
-	attributes->add( this->data4Handle );
-	attributes->add( this->data5Handle );
-	attributes->add( this->data6Handle );
-	attributes->add( this->data7Handle );
-	attributes->add( this->data8Handle );
-	attributes->add( this->data9Handle );
-	attributes->add( this->data10Handle );
-	attributes->add( this->data11Handle );
-	attributes->add( this->data12Handle );
-	attributes->add( this->data13Handle );
-	attributes->add( this->data14Handle );
-	attributes->add( this->data15Handle );
+	
+	
+    
 	
 	
 	// do the actual publication
-	rtiamb->publishObjectClass( this->aHandle, *attributes );
+	// rtiamb->publishObjectClass( this->aHandle, *attributes );
 	//cout << " >>>>>>>>>> Atributos publicados <<<<<<<<<<" << endl;
 	
 
@@ -367,7 +561,7 @@ void VirtualBusFederate::publishAndSubscribe()
 	/////////////////////////////////////////////////
 	// we also want to hear about the same sort of information as it is
 	// created and altered in other federates, so we need to subscribe to it
-	rtiamb->subscribeObjectClassAttributes( this->aHandle, *attributes );
+	
 	//cout << " >>>>>>>>>> Atributos subinscritos <<<<<<<<<<" << endl;
 	
 
@@ -389,7 +583,7 @@ void VirtualBusFederate::publishAndSubscribe()
 	//rtiamb->subscribeInteractionClass( this->xHandle );
 
 	// clean up
-	delete attributes;
+	//delete attributes;
 }
 
 /*
@@ -400,6 +594,11 @@ void VirtualBusFederate::publishAndSubscribe()
 RTI::ObjectHandle VirtualBusFederate::registerObject()
 {
 	return rtiamb->registerObjectInstance( rtiamb->getObjectClassHandle("VirtualBus.port") );
+}
+
+RTI::ObjectHandle VirtualBusFederate::registerObject(std::string s)
+{
+	return rtiamb->registerObjectInstance( rtiamb->getObjectClassHandle(s.c_str()) );
 }
 
 /*
@@ -417,32 +616,129 @@ void VirtualBusFederate::updateAttributeValues(unsigned src, unsigned addr, unsi
 	///////////////////////////////////////////////
 	// create the collection to store the values in, as you can see
 	// this is quite a lot of work
-	RTI::AttributeHandleValuePairSet *attributes = RTI::AttributeSetFactory::create( 19 );
+
+    if(strcmp(federateName, "Env") == 0)
+    {
+	    RTI::AttributeHandleValuePairSet *attributes1 = RTI::AttributeSetFactory::create( 20 );
+        RTI::AttributeHandleValuePairSet *attributes2 = RTI::AttributeSetFactory::create( 20 );
+
+        attributes1->add( srcHandle_dut, (char*)&src, (RTI::ULong)sizeof(unsigned));
+        attributes1->add( addrHandle_dut, (char*)&addr, (RTI::ULong)sizeof(unsigned));
+        attributes1->add( sizeHandle_dut, (char*)&size, (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data0Handle_dut, (char*)&data[0], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data1Handle_dut, (char*)&data[1], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data2Handle_dut, (char*)&data[2], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data3Handle_dut, (char*)&data[3], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data4Handle_dut, (char*)&data[4], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data5Handle_dut, (char*)&data[5], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data6Handle_dut, (char*)&data[6], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data7Handle_dut, (char*)&data[7], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data8Handle_dut, (char*)&data[8], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data9Handle_dut, (char*)&data[9], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data10Handle_dut, (char*)&data[10], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data11Handle_dut, (char*)&data[11], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data12Handle_dut, (char*)&data[12], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data13Handle_dut, (char*)&data[13], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data14Handle_dut, (char*)&data[14], (RTI::ULong)sizeof(unsigned));
+        attributes1->add( data15Handle_dut, (char*)&data[15], (RTI::ULong)sizeof(unsigned));  
+
+        attributes2->add( srcHandle_ref, (char*)&src, (RTI::ULong)sizeof(unsigned));
+        attributes2->add( addrHandle_ref, (char*)&addr, (RTI::ULong)sizeof(unsigned));
+        attributes2->add( sizeHandle_ref, (char*)&size, (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data0Handle_ref, (char*)&data[0], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data1Handle_ref, (char*)&data[1], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data2Handle_ref, (char*)&data[2], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data3Handle_ref, (char*)&data[3], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data4Handle_ref, (char*)&data[4], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data5Handle_ref, (char*)&data[5], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data6Handle_ref, (char*)&data[6], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data7Handle_ref, (char*)&data[7], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data8Handle_ref, (char*)&data[8], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data9Handle_ref, (char*)&data[9], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data10Handle_ref, (char*)&data[10], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data11Handle_ref, (char*)&data[11], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data12Handle_ref, (char*)&data[12], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data13Handle_ref, (char*)&data[13], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data14Handle_ref, (char*)&data[14], (RTI::ULong)sizeof(unsigned));
+        attributes2->add( data15Handle_ref, (char*)&data[15], (RTI::ULong)sizeof(unsigned));  
+
+        RTIfedTime time = fedamb->federateTime + fedamb->federateLookahead;
+	    rtiamb->updateAttributeValues(oHandle_dut, *attributes1, time, federateName );
+        rtiamb->updateAttributeValues(oHandle_ref, *attributes2, time, federateName );
+        
+        delete attributes1;
+        delete attributes2;
+    }
+    else
+    {
+       if(strcmp(federateName, "1") == 0)
+       {           
+           RTI::AttributeHandleValuePairSet *attributes1 = RTI::AttributeSetFactory::create( 20 );
+
+           attributes1->add( srcHandle_dut, (char*)&src, (RTI::ULong)sizeof(unsigned));
+           attributes1->add( addrHandle_dut, (char*)&addr, (RTI::ULong)sizeof(unsigned));
+           attributes1->add( sizeHandle_dut, (char*)&size, (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data0Handle_dut, (char*)&data[0], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data1Handle_dut, (char*)&data[1], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data2Handle_dut, (char*)&data[2], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data3Handle_dut, (char*)&data[3], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data4Handle_dut, (char*)&data[4], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data5Handle_dut, (char*)&data[5], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data6Handle_dut, (char*)&data[6], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data7Handle_dut, (char*)&data[7], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data8Handle_dut, (char*)&data[8], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data9Handle_dut, (char*)&data[9], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data10Handle_dut, (char*)&data[10], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data11Handle_dut, (char*)&data[11], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data12Handle_dut, (char*)&data[12], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data13Handle_dut, (char*)&data[13], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data14Handle_dut, (char*)&data[14], (RTI::ULong)sizeof(unsigned));
+           attributes1->add( data15Handle_dut, (char*)&data[15], (RTI::ULong)sizeof(unsigned)); 
+
+           RTIfedTime time = fedamb->federateTime + fedamb->federateLookahead;
+           rtiamb->updateAttributeValues(oHandle_dut, *attributes1, time, federateName );   
+
+           delete attributes1;     
+       }
+       else
+       {
+           RTI::AttributeHandleValuePairSet *attributes2 = RTI::AttributeSetFactory::create( 20 );
+
+           attributes2->add( srcHandle_ref, (char*)&src, (RTI::ULong)sizeof(unsigned));
+           attributes2->add( addrHandle_ref, (char*)&addr, (RTI::ULong)sizeof(unsigned));
+           attributes2->add( sizeHandle_ref, (char*)&size, (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data0Handle_ref, (char*)&data[0], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data1Handle_ref, (char*)&data[1], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data2Handle_ref, (char*)&data[2], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data3Handle_ref, (char*)&data[3], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data4Handle_ref, (char*)&data[4], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data5Handle_ref, (char*)&data[5], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data6Handle_ref, (char*)&data[6], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data7Handle_ref, (char*)&data[7], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data8Handle_ref, (char*)&data[8], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data9Handle_ref, (char*)&data[9], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data10Handle_ref, (char*)&data[10], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data11Handle_ref, (char*)&data[11], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data12Handle_ref, (char*)&data[12], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data13Handle_ref, (char*)&data[13], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data14Handle_ref, (char*)&data[14], (RTI::ULong)sizeof(unsigned));
+           attributes2->add( data15Handle_ref, (char*)&data[15], (RTI::ULong)sizeof(unsigned)); 
+
+           RTIfedTime time = fedamb->federateTime + fedamb->federateLookahead;
+	       rtiamb->updateAttributeValues(oHandle_ref, *attributes2, time, federateName ); 
+
+           delete attributes2;
+       } 
+    }
+
+	
 
 	// generate the new values
 	// we use EncodingHelpers to make things nice friendly for both Java and C++
 
 	// cout << "**** Adicionando atributos ****" << endl;
-
-	attributes->add( srcHandle, (char*)&src, (RTI::ULong)sizeof(unsigned));
-	attributes->add( addrHandle, (char*)&addr, (RTI::ULong)sizeof(unsigned));
-	attributes->add( sizeHandle, (char*)&size, (RTI::ULong)sizeof(unsigned));
-	attributes->add( data0Handle, (char*)&data[0], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data1Handle, (char*)&data[1], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data2Handle, (char*)&data[2], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data3Handle, (char*)&data[3], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data4Handle, (char*)&data[4], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data5Handle, (char*)&data[5], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data6Handle, (char*)&data[6], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data7Handle, (char*)&data[7], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data8Handle, (char*)&data[8], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data9Handle, (char*)&data[9], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data10Handle, (char*)&data[10], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data11Handle, (char*)&data[11], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data12Handle, (char*)&data[12], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data13Handle, (char*)&data[13], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data14Handle, (char*)&data[14], (RTI::ULong)sizeof(unsigned));
-	attributes->add( data15Handle, (char*)&data[15], (RTI::ULong)sizeof(unsigned));
+ 
+    
 	
 	// cout << "3: " << endl;
 	
@@ -451,13 +747,11 @@ void VirtualBusFederate::updateAttributeValues(unsigned src, unsigned addr, unsi
 	
 	// note that if you want to associate a particular timestamp with the
 	// update. here we send another update, this time with a timestamp:
-	RTIfedTime time = fedamb->federateTime + fedamb->federateLookahead;
-	rtiamb->updateAttributeValues(oHandle, *attributes, time, federateName );
-	
+		
 	// cout << "4: " << endl;
 
 	// clean up
-	delete attributes;
+	
 }
 
 

@@ -29,6 +29,7 @@ SC_MODULE(ii_monitor)
     unsigned addr;
     unsigned int size, data[16];
     unsigned readsrc;
+    unsigned cntrl_write;
 
     //-----------------------------
     // Input
@@ -149,9 +150,10 @@ void ii_monitor::copy_if_sqi()
             INFO(name(), msg.str().c_str(), HIGH);
             msg.str(""); //clean
         }
-        // federate->advanceTime(1.0);
+       // federate->advanceTime(1.0);
         
     }
+    // federate->advanceTime(1.0);
 
 
   //save output data

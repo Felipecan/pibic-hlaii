@@ -1,6 +1,9 @@
 #ifndef ARMVirtualBusFederate_H_
 #define ARMVirtualBusFederate_H_
 
+#include <string>
+#include <cstring>
+
 #include "FederateAmbassador.h"
 #include "RTI.hh"
 
@@ -18,28 +21,51 @@ class VirtualBusFederate
 		char federateName[12];
 
 		// fom handles //
-		RTI::ObjectHandle      	    oHandle;		
-		RTI::ObjectClassHandle      aHandle;
-		RTI::AttributeHandle        srcHandle;
-		RTI::AttributeHandle        addrHandle;
-		RTI::AttributeHandle        sizeHandle;
-		RTI::AttributeHandle        data0Handle;
-		RTI::AttributeHandle        data1Handle;
-		RTI::AttributeHandle        data2Handle;
-		RTI::AttributeHandle        data3Handle;
-		
-		RTI::AttributeHandle        data4Handle;
-		RTI::AttributeHandle        data5Handle;
-		RTI::AttributeHandle        data6Handle;
-		RTI::AttributeHandle        data7Handle;
-		RTI::AttributeHandle        data8Handle;
-		RTI::AttributeHandle        data9Handle;
-		RTI::AttributeHandle        data10Handle;
-		RTI::AttributeHandle        data11Handle;	
-		RTI::AttributeHandle        data12Handle;
-		RTI::AttributeHandle        data13Handle;
-		RTI::AttributeHandle        data14Handle;
-		RTI::AttributeHandle        data15Handle;
+		RTI::ObjectHandle      	    oHandle_dut;		
+		RTI::ObjectClassHandle      aHandle_dut;
+
+        RTI::ObjectHandle      	    oHandle_ref;		
+		RTI::ObjectClassHandle      aHandle_ref;
+
+		RTI::AttributeHandle        srcHandle_dut;
+		RTI::AttributeHandle        addrHandle_dut;
+		RTI::AttributeHandle        sizeHandle_dut;
+		RTI::AttributeHandle        data0Handle_dut;
+		RTI::AttributeHandle        data1Handle_dut;
+		RTI::AttributeHandle        data2Handle_dut;
+		RTI::AttributeHandle        data3Handle_dut;		
+		RTI::AttributeHandle        data4Handle_dut;
+		RTI::AttributeHandle        data5Handle_dut;
+		RTI::AttributeHandle        data6Handle_dut;
+		RTI::AttributeHandle        data7Handle_dut;
+		RTI::AttributeHandle        data8Handle_dut;
+		RTI::AttributeHandle        data9Handle_dut;
+		RTI::AttributeHandle        data10Handle_dut;
+		RTI::AttributeHandle        data11Handle_dut;	
+		RTI::AttributeHandle        data12Handle_dut;
+		RTI::AttributeHandle        data13Handle_dut;
+		RTI::AttributeHandle        data14Handle_dut;
+		RTI::AttributeHandle        data15Handle_dut;
+
+        RTI::AttributeHandle        srcHandle_ref;
+		RTI::AttributeHandle        addrHandle_ref;
+		RTI::AttributeHandle        sizeHandle_ref;
+		RTI::AttributeHandle        data0Handle_ref;
+		RTI::AttributeHandle        data1Handle_ref;
+		RTI::AttributeHandle        data2Handle_ref;
+		RTI::AttributeHandle        data3Handle_ref;		
+		RTI::AttributeHandle        data4Handle_ref;
+		RTI::AttributeHandle        data5Handle_ref;
+		RTI::AttributeHandle        data6Handle_ref;
+		RTI::AttributeHandle        data7Handle_ref;
+		RTI::AttributeHandle        data8Handle_ref;
+		RTI::AttributeHandle        data9Handle_ref;
+		RTI::AttributeHandle        data10Handle_ref;
+		RTI::AttributeHandle        data11Handle_ref;	
+		RTI::AttributeHandle        data12Handle_ref;
+		RTI::AttributeHandle        data13Handle_ref;
+		RTI::AttributeHandle        data14Handle_ref;
+		RTI::AttributeHandle        data15Handle_ref;          
 		
 		
 
@@ -50,14 +76,14 @@ class VirtualBusFederate
 		void loop(int iteracoes);
 		void finalize();
 
-
-		void writeData(unsigned src, unsigned addr, unsigned size, unsigned *data);
 		
-		bool readData(unsigned& src, unsigned& addr, unsigned& size, unsigned *data);
-		
-		bool hasReceivedData();
-		
+        void writeData(unsigned src, unsigned addr, unsigned size, unsigned *data);
+		bool readData(unsigned& src, unsigned& addr, unsigned& size, unsigned *data);		
+		bool hasReceivedData();	
 		void advanceTime( double timestep );
+
+
+
 
 	private:
 
@@ -69,8 +95,9 @@ class VirtualBusFederate
 		void enableTimePolicy();
 		void publishAndSubscribe();
 		RTI::ObjectHandle registerObject();
-		void updateAttributeValues(unsigned src, unsigned addr, unsigned size, unsigned *data);
-		void sendInteraction();
+        RTI::ObjectHandle registerObject(std::string s);
+        void updateAttributeValues(unsigned src, unsigned addr, unsigned size, unsigned *data);		
+        void sendInteraction();
 		
 		void deleteObject( RTI::ObjectHandle objectHandle );
 		double getLbts();

@@ -40,7 +40,6 @@ bool FederateAmbassador::hasReceivedData(){
 	return receivedData;
 }
 
-
 void FederateAmbassador::getReceivedData(unsigned& src, unsigned& addr, unsigned& size, unsigned *data){
 	src = this->source; 	
 	addr = this->address;
@@ -290,11 +289,11 @@ void FederateAmbassador::reflectAttributeValues( RTI::ObjectHandle theObject,
 	theAttributes.getValue(18,(char*)dt15,length);
 	data[15] = *dt15;
 
-	// cout << " _-_-_ " << data[0] << " " << data[1] << " " << data[2] << " " << endl;
+    // cout << " _-_-_ " << data[0] << " " << data[1] << " " << data[2] << " " << endl;
 	
 	// cout << "Dados recebidos " << endl;
 	
-	receivedData =  true;
+	receivedData =  true;    
 }
 
 //                             //

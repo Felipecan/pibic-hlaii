@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/sender.dir/VirtualBusFederate.o CMakeFiles/sender.dir/main.o CMakeFiles/sender.dir/FederateAmbassador.o  -o sender -rdynamic -lgraph -lRTI -lFedTime 
