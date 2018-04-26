@@ -40,7 +40,8 @@ public :
         INFO(name, " Set seed");
         ii_env->ii_drv->set_seed(seed);
 
-        double data[DATA_SIZE] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+        // double data[DATA_SIZE] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+        double data[DATA_SIZE] = {1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8};
 
         INFO(name, " Send the fixed array");
         ii_env->ii_drv->set_data(data);

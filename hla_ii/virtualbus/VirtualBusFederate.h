@@ -27,6 +27,9 @@ class VirtualBusFederate
         RTI::ObjectHandle      	    oHandle_ref;		
 		RTI::ObjectClassHandle      aHandle_ref;
 
+        RTI::ObjectHandle      	    oHandle_all;		
+		RTI::ObjectClassHandle      aHandle_all;
+
 		RTI::AttributeHandle        srcHandle_dut;
 		RTI::AttributeHandle        addrHandle_dut;
 		RTI::AttributeHandle        sizeHandle_dut;
@@ -65,7 +68,27 @@ class VirtualBusFederate
 		RTI::AttributeHandle        data12Handle_ref;
 		RTI::AttributeHandle        data13Handle_ref;
 		RTI::AttributeHandle        data14Handle_ref;
-		RTI::AttributeHandle        data15Handle_ref;          
+		RTI::AttributeHandle        data15Handle_ref;   
+
+        RTI::AttributeHandle        srcHandle_all;
+		RTI::AttributeHandle        addrHandle_all;
+		RTI::AttributeHandle        sizeHandle_all;
+		RTI::AttributeHandle        data0Handle_all;
+		RTI::AttributeHandle        data1Handle_all;
+		RTI::AttributeHandle        data2Handle_all;
+		RTI::AttributeHandle        data3Handle_all;		
+		RTI::AttributeHandle        data4Handle_all;
+		RTI::AttributeHandle        data5Handle_all;
+		RTI::AttributeHandle        data6Handle_all;
+		RTI::AttributeHandle        data7Handle_all;
+		RTI::AttributeHandle        data8Handle_all;
+		RTI::AttributeHandle        data9Handle_all;
+		RTI::AttributeHandle        data10Handle_all;
+		RTI::AttributeHandle        data11Handle_all;	
+		RTI::AttributeHandle        data12Handle_all;
+		RTI::AttributeHandle        data13Handle_all;
+		RTI::AttributeHandle        data14Handle_all;
+		RTI::AttributeHandle        data15Handle_all;        
 		
 		
 
