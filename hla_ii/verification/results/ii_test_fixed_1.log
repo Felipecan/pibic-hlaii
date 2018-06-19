@@ -1,6 +1,129 @@
 		SC VERIFICATION
-		Thu Apr 26 16:49:23 2018
+		Thu May 10 15:22:47 2018
 
-INFO@0 s: [main] Running command line: ./run_verification -t ii_test_fixed -v HIGH 100000 
+INFO@0 s: [main] Running command line: ./run_verification -t ii_test_fixed -v HIGH 
 INFO@0 s: [ii_test_fixed] Constructor
 INFO@0 s: [ii_top_tb.ii_env] constructor
+INFO@0 s: [ii_top_tb.ii_env.ii_drv] construtor
+INFO@0 s: [ii_top_tb.ii_env.ii_dut_mon] construtor
+INFO@0 s: [ii_top_tb.ii_env.ii_rm_mon] construtor
+INFO@0 s: [ii_top_tb.ii_env.ii_chk] constructor
+INFO@0 s: [ii_test_fixed] Start Reset Phase
+INFO@0 s: [ii_top_tb.ii_env.ii_reset] Asserting async reset signal....
+INFO@2 ps: [ii_top_tb.ii_env.ii_reset] Reset signal detected....
+INFO@503 ps: [ii_top_tb.ii_env.ii_rm_mon] err data from src 1
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] data from src=readsrc 2
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 0 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 1 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 2 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 3 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 4 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 5 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 6 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 7 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 8 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 9 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 10 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 11 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 12 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 13 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 14 = 0
+INFO@1001 ps: [ii_top_tb.ii_env.ii_rm_mon] Read: out_data 15 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] data from src=readsrc 1
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 0 = 1
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 1 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 2 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 3 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 4 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 5 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 6 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 7 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 8 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 9 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 10 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 11 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 12 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 13 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 14 = 0
+INFO@2 ns: [ii_top_tb.ii_env.ii_dut_mon] Read: out_data 15 = 0
+INFO@10 ns: [ii_test_fixed] Configure Phase
+INFO@10 ns: [ii_test_fixed]  Starting test...
+INFO@10 ns: [ii_test_fixed]  Set seed
+INFO@10 ns: [ii_test_fixed]  Send the fixed array
+INFO@10 ns: [ii_test_fixed]  Finished test!!!
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[0](DUT) = 1 - data_out[0](RM) = 9.0881e+223
+INFO@10 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[1](DUT) = 0 - data_out[1](RM) = 0
+INFO@10 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[2](DUT) = 0 - data_out[2](RM) = 0
+INFO@10 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[3](DUT) = 0 - data_out[3](RM) = 0
+INFO@10 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[4](DUT) = 0 - data_out[4](RM) = 0
+INFO@10 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[5](DUT) = 0 - data_out[5](RM) = 0
+INFO@10 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[6](DUT) = 0 - data_out[6](RM) = 0
+INFO@10 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[7](DUT) = 0 - data_out[7](RM) = 0
+INFO@10 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[8](DUT) = 0 - data_out[8](RM) = 0
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[9](DUT) = 0 - data_out[9](RM) = 1.10671e-321
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[10](DUT) = 0 - data_out[10](RM) = 4.74303e-322
+INFO@10 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[11](DUT) = 0 - data_out[11](RM) = 0
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[12](DUT) = 0 - data_out[12](RM) = 9.43984e+170
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[13](DUT) = 0 - data_out[13](RM) = 4.09783e-80
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[14](DUT) = 0 - data_out[14](RM) = 9.30351e+199
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[15](DUT) = 0 - data_out[15](RM) = 1.17191e+166
+INFO@11 ns: [ii_top_tb.ii_env.ii_dut_mon] err data from src 2
+ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[0](DUT) = 1 - data_out[0](RM) = 9.0881e+223
+INFO@11 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[1](DUT) = 0 - data_out[1](RM) = 0
+INFO@11 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[2](DUT) = 0 - data_out[2](RM) = 0
+INFO@11 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[3](DUT) = 0 - data_out[3](RM) = 0
+INFO@11 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[4](DUT) = 0 - data_out[4](RM) = 0
+INFO@11 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[5](DUT) = 0 - data_out[5](RM) = 0
+INFO@11 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[6](DUT) = 0 - data_out[6](RM) = 0
+INFO@11 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[7](DUT) = 0 - data_out[7](RM) = 0
+INFO@11 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[8](DUT) = 0 - data_out[8](RM) = 0
+ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[9](DUT) = 0 - data_out[9](RM) = 1.10671e-321
+ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[10](DUT) = 0 - data_out[10](RM) = 4.74303e-322
+INFO@11 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[11](DUT) = 0 - data_out[11](RM) = 0
+ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[12](DUT) = 0 - data_out[12](RM) = 9.43984e+170
+ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[13](DUT) = 0 - data_out[13](RM) = 4.09783e-80
+ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[14](DUT) = 0 - data_out[14](RM) = 9.30351e+199
+ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[15](DUT) = 0 - data_out[15](RM) = 1.17191e+166
+ERROR@12 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[0](DUT) = 1 - data_out[0](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[1](DUT) = 0 - data_out[1](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[2](DUT) = 0 - data_out[2](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[3](DUT) = 0 - data_out[3](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[4](DUT) = 0 - data_out[4](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[5](DUT) = 0 - data_out[5](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[6](DUT) = 0 - data_out[6](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[7](DUT) = 0 - data_out[7](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[8](DUT) = 0 - data_out[8](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[9](DUT) = 0 - data_out[9](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[10](DUT) = 0 - data_out[10](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[11](DUT) = 0 - data_out[11](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[12](DUT) = 0 - data_out[12](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[13](DUT) = 0 - data_out[13](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[14](DUT) = 0 - data_out[14](RM) = 0
+INFO@12 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[15](DUT) = 0 - data_out[15](RM) = 0
+ERROR@13 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[0](DUT) = 1 - data_out[0](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[1](DUT) = 0 - data_out[1](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[2](DUT) = 0 - data_out[2](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[3](DUT) = 0 - data_out[3](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[4](DUT) = 0 - data_out[4](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[5](DUT) = 0 - data_out[5](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[6](DUT) = 0 - data_out[6](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[7](DUT) = 0 - data_out[7](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[8](DUT) = 0 - data_out[8](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[9](DUT) = 0 - data_out[9](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[10](DUT) = 0 - data_out[10](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[11](DUT) = 0 - data_out[11](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[12](DUT) = 0 - data_out[12](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[13](DUT) = 0 - data_out[13](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[14](DUT) = 0 - data_out[14](RM) = 0
+INFO@13 ns: [ii_top_tb.ii_env.ii_chk] MATCH between DUT and Reference Model:data_out[15](DUT) = 0 - data_out[15](RM) = 0
+INFO@14 ns: [ii_test_fixed]                                           
+INFO@14 ns: [ii_test_fixed] #########   #######   #########  ##       
+INFO@14 ns: [ii_test_fixed] ##         ##     ##     ##      ##       
+INFO@14 ns: [ii_test_fixed] ##         ##     ##     ##      ##       
+INFO@14 ns: [ii_test_fixed] ######     #########     ##      ##       
+INFO@14 ns: [ii_test_fixed] ##         ##     ##     ##      ##       
+INFO@14 ns: [ii_test_fixed] ##         ##     ##     ##      ##       
+INFO@14 ns: [ii_test_fixed] ##         ##     ##  #########   ########
+INFO@14 ns: [ii_test_fixed]                                           
+ERROR@14 ns: [ii_test_fixed] Simiition completed with 16 errors!
+INFO@14 ns: [ii_test_fixed] Start Finish Phase

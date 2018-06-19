@@ -187,7 +187,7 @@ void FederateAmbassador::reflectAttributeValues( RTI::ObjectHandle theObject,
 	//cout << "1-Reflection Received " << endl;
 	
 	// print the handle
-	//cout << " object=" << theObject;
+	cout << " object=" << theObject << endl;
 	// print the tag
 	//cout << "tag= " << theTag;
 	
@@ -228,7 +228,7 @@ void FederateAmbassador::reflectAttributeValues( RTI::ObjectHandle theObject,
 	unsigned* dt0 = new unsigned[1];
 	theAttributes.getValue(3,(char*)dt0,length);
 	data[0] = *dt0;
-
+    cout << data[0] << endl;
 	unsigned* dt1 = new unsigned[1];
 	theAttributes.getValue(4,(char*)dt1,length);
 	data[1] = *dt1;

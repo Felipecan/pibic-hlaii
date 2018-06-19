@@ -128,7 +128,8 @@ void ii_monitor::copy_if_sqi()
     {
         if(src == readsrc)
         {
-            msg << "data from src " << src;
+            ii_sqi->data_valid  = 1;
+            msg << "data from src=readsrc " << src;
             INFO(name(), msg.str().c_str(), HIGH);
             msg.str(""); //clean
 
@@ -146,14 +147,14 @@ void ii_monitor::copy_if_sqi()
         }
         else
         {
-            msg << "data from src " << src;
+            msg << "err data from src " << src;
             INFO(name(), msg.str().c_str(), HIGH);
             msg.str(""); //clean
         }
        // federate->advanceTime(1.0);
         
     }
-    // federate->advanceTime(1.0);
+    
 
 
   //save output data

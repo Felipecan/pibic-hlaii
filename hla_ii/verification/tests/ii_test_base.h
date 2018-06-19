@@ -97,7 +97,7 @@ class ii_test_base {
         INFO(name, "##         ##     ##     ##      ##       ", LOW);
         INFO(name, "##         ##     ##  #########   ########", LOW);
         INFO(name, "                                          ", LOW);
-	msg << "Simiition completed with " << errors << " errors!";
+	    msg << "Simiition completed with " << errors << " errors!";
         ERROR(name, msg.str().c_str(), LOW);
       }
       else {

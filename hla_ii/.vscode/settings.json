@@ -24,6 +24,15 @@
         "streambuf": "cpp",
         "system_error": "cpp",
         "type_traits": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "cmath": "cpp",
+        "cstddef": "cpp",
+        "cstring": "cpp",
+        "array": "cpp",
+        "complex": "cpp",
+        "functional": "cpp",
+        "iomanip": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp"
     }
 }

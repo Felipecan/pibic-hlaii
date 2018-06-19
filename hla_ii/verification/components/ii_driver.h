@@ -144,7 +144,7 @@ void ii_driver::drive()
             //file_h << drv_if->in_data_en << " " <<  drv_if->in_data_a << " " << drv_if->in_data_b << " " << drv_if->in_sel << endl;
 
             //send the data to checker
-            drv_port.write(*ii_sqi);
+            drv_port.write(*ii_sqi);        
             update_interface = 0;
             //std::cout << "Writing data 2 " << src << std::endl;
             // federate->advanceTime(1.0);               

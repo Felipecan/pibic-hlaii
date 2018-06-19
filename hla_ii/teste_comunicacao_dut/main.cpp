@@ -3,7 +3,7 @@
 #include <cstdio>
 #include "VirtualBusFederate.h"
 
-#define VIRTUALBUS_SIZE 1
+#define VIRTUALBUS_SIZE 16
 #define IMAGE_WIDTH 4
 #define IMAGE_HEIGHT 4
 
@@ -47,12 +47,12 @@ int main( int argc, char **argv )
             //std::cout << "Leu o if " << readsrc << std::endl;
             if(readsrc == 0)
             {                   
-                std::cout << "data from src " << readsrc << std::endl;
+                std::cout << "data from src " << readsrc << ":";
                 for (size_t i = 0; i < VIRTUALBUS_SIZE; i++) 
                 {
-                    printf("%d ", data[i]);
+                    std::cout << " " << data[i];
                 }
-                printf("\n");
+                std::cout << std::endl;
                 //for(int aux = 0; aux < 16; aux++) std::cout << "data[" << aux << "] " << data[aux] << std::endl;
                 //send data by HLA
                 addr = SENDER_ID; //Sender address
@@ -87,7 +87,7 @@ int main( int argc, char **argv )
                         a[i][j] += a[i-1][j]+a[i][j-1]-a[i-1][j-1];
 
 
-                data[0]  = a[0][0];
+                data[0]  = a[0][0]+1;
                 data[1]  = a[0][1];
                 data[2]  = a[0][2];
                 data[3]  = a[0][3];
@@ -107,8 +107,8 @@ int main( int argc, char **argv )
                 src = 1;
 
                 federate->writeData(src, addr, size,  data);
-                for(int aux = 0; aux < 16; aux++) 
-                    std::cout << "data[" << aux << "] " << data[aux] << std::endl;
+                for(int aux = 0; aux < VIRTUALBUS_SIZE; aux++) 
+                    std::cout << "new data[" << aux << "] " << data[aux] << std::endl;
             }   
 	    }
 	    else{}
