@@ -22,15 +22,29 @@ class FederateAmbassador : public NullFederateAmbassador
 
 		//meus atributos
 	private:
-		bool receivedData;        
-		unsigned source;		
-		unsigned address;
-		unsigned size;
-		unsigned data[16];        
+		bool receivedData_ ;        
+		bool receivedData_1;        
+		bool receivedData_2;
+
+		unsigned source_;		
+		unsigned address_;
+		unsigned size_;
+		unsigned data_[16];
+
+		unsigned source_1;		
+		unsigned address_1;
+		unsigned size_1;
+		unsigned data_1[16];
+
+		unsigned source_2;		
+		unsigned address_2;
+		unsigned size_2;
+		unsigned data_2[16];                
 
 	public:
 		//meus metodos
 		bool hasReceivedData();
+		bool hasReceivedData_from_src(unsigned src);
 		void getReceivedData(unsigned& src, unsigned& addr, unsigned& size, unsigned *data);
         
 

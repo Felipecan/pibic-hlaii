@@ -40,7 +40,7 @@ void VirtualBusFederate::writeData(unsigned src, unsigned addr, unsigned size, u
 
 
 bool VirtualBusFederate::readData(unsigned& source, unsigned& addr, unsigned& size, unsigned *data){
-	if(fedamb->hasReceivedData()){
+	if(fedamb->hasReceivedData_from_src(source)){
 		fedamb->getReceivedData(source, addr, size, data);
 		return true;
 	}
@@ -772,32 +772,32 @@ void VirtualBusFederate::updateAttributeValues(unsigned src, unsigned addr, unsi
 	// create the collection to store the values in, as you can see
 	// this is quite a lot of work
 
-    cout << "upav Meu ID: " << federateName << endl;
+    // cout << "upav Meu ID: " << federateName << endl;
 
     if(strcmp(federateName, "Env") == 0)
     {
-	    RTI::AttributeHandleValuePairSet *attributes1 = RTI::AttributeSetFactory::create( 20 );
+	    RTI::AttributeHandleValuePairSet *attributes = RTI::AttributeSetFactory::create( 20 );
         // RTI::AttributeHandleValuePairSet *attributes2 = RTI::AttributeSetFactory::create( 20 );
 
-        attributes1->add( srcHandle_all, (char*)&src, (RTI::ULong)sizeof(unsigned));
-        attributes1->add( addrHandle_all, (char*)&addr, (RTI::ULong)sizeof(unsigned));
-        attributes1->add( sizeHandle_all, (char*)&size, (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data0Handle_all, (char*)&data[0], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data1Handle_all, (char*)&data[1], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data2Handle_all, (char*)&data[2], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data3Handle_all, (char*)&data[3], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data4Handle_all, (char*)&data[4], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data5Handle_all, (char*)&data[5], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data6Handle_all, (char*)&data[6], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data7Handle_all, (char*)&data[7], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data8Handle_all, (char*)&data[8], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data9Handle_all, (char*)&data[9], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data10Handle_all, (char*)&data[10], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data11Handle_all, (char*)&data[11], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data12Handle_all, (char*)&data[12], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data13Handle_all, (char*)&data[13], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data14Handle_all, (char*)&data[14], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data15Handle_all, (char*)&data[15], (RTI::ULong)sizeof(unsigned));  
+        attributes->add( srcHandle_all, (char*)&src, (RTI::ULong)sizeof(unsigned));
+        attributes->add( addrHandle_all, (char*)&addr, (RTI::ULong)sizeof(unsigned));
+        attributes->add( sizeHandle_all, (char*)&size, (RTI::ULong)sizeof(unsigned));
+        attributes->add( data0Handle_all, (char*)&data[0], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data1Handle_all, (char*)&data[1], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data2Handle_all, (char*)&data[2], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data3Handle_all, (char*)&data[3], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data4Handle_all, (char*)&data[4], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data5Handle_all, (char*)&data[5], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data6Handle_all, (char*)&data[6], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data7Handle_all, (char*)&data[7], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data8Handle_all, (char*)&data[8], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data9Handle_all, (char*)&data[9], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data10Handle_all, (char*)&data[10], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data11Handle_all, (char*)&data[11], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data12Handle_all, (char*)&data[12], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data13Handle_all, (char*)&data[13], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data14Handle_all, (char*)&data[14], (RTI::ULong)sizeof(unsigned));
+        attributes->add( data15Handle_all, (char*)&data[15], (RTI::ULong)sizeof(unsigned));  
 
         // attributes2->add( srcHandle_ref, (char*)&src, (RTI::ULong)sizeof(unsigned));
         // attributes2->add( addrHandle_ref, (char*)&addr, (RTI::ULong)sizeof(unsigned));
@@ -820,10 +820,10 @@ void VirtualBusFederate::updateAttributeValues(unsigned src, unsigned addr, unsi
         // attributes2->add( data15Handle_ref, (char*)&data[15], (RTI::ULong)sizeof(unsigned));  
 
         RTIfedTime time = fedamb->federateTime + fedamb->federateLookahead;
-	    rtiamb->updateAttributeValues(oHandle_all, *attributes1, time, federateName );
+	    rtiamb->updateAttributeValues(oHandle_all, *attributes, time, federateName );
         //rtiamb->updateAttributeValues(oHandle_ref, *attributes2, time, federateName );
         
-        delete attributes1;
+        delete attributes;
         //delete attributes2;
     }
 
@@ -852,9 +852,9 @@ void VirtualBusFederate::updateAttributeValues(unsigned src, unsigned addr, unsi
         attributes1->add( data15Handle_dut, (char*)&data[15], (RTI::ULong)sizeof(unsigned)); 
 
         RTIfedTime time = fedamb->federateTime + fedamb->federateLookahead;
-        rtiamb->updateAttributeValues(oHandle_dut, *attributes1, time, federateName );   
+        rtiamb->updateAttributeValues(oHandle_dut, *attributes1, time, federateName ); 
 
-        delete attributes1;     
+        delete attributes1;    
     }
 
     if(strcmp(federateName, "2") == 0)

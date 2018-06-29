@@ -124,12 +124,14 @@ void ii_monitor::copy_if_sqi()
     //     msg.str(""); //clean
     // }
 
+    src = readsrc;
     if(federate->readData(src, addr, size, data))
     {
         if(src == readsrc)
         {
             ii_sqi->data_valid  = 1;
             msg << "data from src=readsrc " << src;
+            cout << msg.str() << endl;
             INFO(name(), msg.str().c_str(), HIGH);
             msg.str(""); //clean
 
@@ -137,6 +139,7 @@ void ii_monitor::copy_if_sqi()
             {                
                 ii_sqi->data_out[i] = data[i]; // ?
                 msg << "Read: out_data " << i << " = " << ii_sqi->data_out[i];
+                cout << msg.str() << endl;
                 INFO(name(), msg.str().c_str(), HIGH);
                 msg.str(""); //clean
 

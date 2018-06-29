@@ -42,6 +42,7 @@ int main( int argc, char **argv )
 
 	while(1)
 	{        
+        readsrc = 0;
 		if(federate->readData(readsrc,addr,size, data))
 		{
             //std::cout << "Leu o if " << readsrc << std::endl;
@@ -107,9 +108,10 @@ int main( int argc, char **argv )
                 src=2;
                 
                 federate->writeData(src, addr, size,  data);
-//                federate->advanceTime(1.0);
+                std::cout << "New data (REF):";
                 for(int aux = 0; aux < VIRTUALBUS_SIZE; aux++) 
-                    std::cout << "new data[" << aux << "] " << data[aux] << std::endl;
+                    std::cout << " " << data[aux];
+                std::cout << std::endl;
             }
 
 	    }

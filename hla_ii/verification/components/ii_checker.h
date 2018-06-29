@@ -100,10 +100,10 @@ void ii_checker::check(){
       }
 
       if(ii_sqi.data_valid){
-    	switch(select_checker){
-	  case 1: ii_checker::compare_dut_refmod(ii_sqi); break;
+        switch(select_checker){
+          case 1: ii_checker::compare_dut_refmod(ii_sqi); break;
           default: break;
-    	}
+        }
       }
     wait(1); 
   }

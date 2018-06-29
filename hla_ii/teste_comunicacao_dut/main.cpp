@@ -42,6 +42,7 @@ int main( int argc, char **argv )
 
 	while(1)
 	{
+        readsrc = 0;
 		if(federate->readData(readsrc, addr, size, data))
 		{
             //std::cout << "Leu o if " << readsrc << std::endl;
@@ -87,7 +88,7 @@ int main( int argc, char **argv )
                         a[i][j] += a[i-1][j]+a[i][j-1]-a[i-1][j-1];
 
 
-                data[0]  = a[0][0]+1;
+                data[0]  = a[0][0];
                 data[1]  = a[0][1];
                 data[2]  = a[0][2];
                 data[3]  = a[0][3];
@@ -107,8 +108,10 @@ int main( int argc, char **argv )
                 src = 1;
 
                 federate->writeData(src, addr, size,  data);
+                std::cout << "New data (DUT):";
                 for(int aux = 0; aux < VIRTUALBUS_SIZE; aux++) 
-                    std::cout << "new data[" << aux << "] " << data[aux] << std::endl;
+                    std::cout << " " << data[aux];
+                std::cout << std::endl;
             }   
 	    }
 	    else{}
