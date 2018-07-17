@@ -30,6 +30,7 @@ SC_MODULE(ii_monitor)
     unsigned int size, data[16];
     unsigned readsrc;
     unsigned cntrl_write;
+    unsigned count = 0;
 
     //-----------------------------
     // Input
@@ -126,33 +127,54 @@ void ii_monitor::copy_if_sqi()
 
     src = readsrc;
     if(federate->readData(src, addr, size, data))
-    {
+    {        
         if(src == readsrc)
         {
-            ii_sqi->data_valid  = 1;
-            msg << "data from src=readsrc " << src;
-            cout << msg.str() << endl;
-            INFO(name(), msg.str().c_str(), HIGH);
-            msg.str(""); //clean
+            if(count < 11 && src == 2)   
+            {
+                count++;
+                ii_sqi->data_valid  = 0;
+                msg << "ERRO:" << src;
+                INFO(name(), msg.str().c_str(), HIGH);
+                msg.str(""); //clean
+                for(int i = 0; i < DATA_SIZE; i++) 
+                {                
+                    msg << "Read: out_data " << i << " = " << data[i];
+                    INFO(name(), msg.str().c_str(), HIGH);
+                    msg.str(""); //clean
 
-            for(int i = 0; i < DATA_SIZE; i++) 
-            {                
-                ii_sqi->data_out[i] = data[i]; // ?
-                msg << "Read: out_data " << i << " = " << ii_sqi->data_out[i];
-                cout << msg.str() << endl;
+                    file_data_out << data[i] << " ";
+                }
+                file_data_out << std::endl;
+            }
+            else
+            {
+                ii_sqi->data_valid  = 1;
+                msg << "data from src=readsrc " << src;
+                // cout << msg.str() << endl;
                 INFO(name(), msg.str().c_str(), HIGH);
                 msg.str(""); //clean
 
-                file_data_out << data[i] << " ";
-            }
+                for(int i = 0; i < DATA_SIZE; i++) 
+                {                
+                    ii_sqi->data_out[i] = (unsigned int)data[i]; // ?
+                    msg << "Read: out_data " << i << " = " << ii_sqi->data_out[i];
+                    // cout << msg.str() << endl;
+                    INFO(name(), msg.str().c_str(), HIGH);
+                    msg.str(""); //clean
 
-            file_data_out << std::endl;
+                    file_data_out << data[i] << " ";
+                }
+
+                file_data_out << std::endl;
+            }
+        
         }
         else
-        {
+        {         
             msg << "err data from src " << src;
             INFO(name(), msg.str().c_str(), HIGH);
-            msg.str(""); //clean
+            msg.str(""); //clean            
         }
        // federate->advanceTime(1.0);
         

@@ -152,6 +152,7 @@ void ii_checker::compare_dut_refmod(ii_sequence_item item){
 
     for (int i = 0; i < DATA_SIZE; ++i) {
       if(ii_rm_sqi.data_out[i] != item.data_out[i]) {
+      //if(ii_rm_sqi.data_out[i] != ii_sqi.data_out[i]) {
         msg << "MISMATCH between DUT and Reference Model: data_out[" << i << "](DUT) = " << ii_sqi.data_out[i] << " - data_out[" << i << "](RM) = " << ii_rm_sqi.data_out[i];
         ERROR(name(), msg.str().c_str());
         msg.str(""); //clean

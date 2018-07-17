@@ -114,7 +114,7 @@ int main( int argc, char **argv )
                 std::cout << std::endl;
             }   
 	    }
-	    else{}
+
         federate->advanceTime(1.0);
 
 	  	

@@ -185,7 +185,7 @@ void VirtualBusFederate::runFederate( char* federateName )
 	/////////////////////////////
 	// in this section we enable/disable all time policies
 	// note that this step is optional!
-	// enableTimePolicy();
+	enableTimePolicy();
 	cout << "Time Policy Enabled" << endl;
 
 	//////////////////////////////

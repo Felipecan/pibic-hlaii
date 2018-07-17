@@ -15,12 +15,14 @@ SC_MODULE(ii_environment)
 {
   public:
 
+    //HLA variables... 
     VirtualBusFederate *federate;
     unsigned src;
     unsigned addr;
     unsigned int size, data[16];
     char* federateName = "Env";        
-    
+    //-----
+
     //+--------------------------------------------------------------------------
     //| Components Members
     //+--------------------------------------------------------------------------
@@ -62,19 +64,19 @@ SC_MODULE(ii_environment)
         ii_drv = new ii_driver("ii_drv",ii_vif);
         ii_drv->clk(sc_rst_if->clk);
         ii_drv->async_reset(sc_rst_if->reset_n);
-        ii_drv->federate = federate;
+        ii_drv->federate = federate; //hla
 
         ii_dut_mon = new ii_monitor("ii_dut_mon",ii_vif);  
         ii_dut_mon->clk(sc_rst_if->clk);
         ii_dut_mon->async_reset(sc_rst_if->reset_n);
-        ii_dut_mon->federate = federate;
-        ii_dut_mon->readsrc = 1;
+        ii_dut_mon->federate = federate; //hla
+        ii_dut_mon->readsrc = 1; //hla
 
         ii_rm_mon = new ii_monitor("ii_rm_mon",ii_rm_vif);  
         ii_rm_mon->clk(sc_rst_if->clk);
         ii_rm_mon->async_reset(sc_rst_if->reset_n);
-        ii_rm_mon->federate = federate;
-        ii_rm_mon->readsrc = 2;
+        ii_rm_mon->federate = federate; //hla
+        ii_rm_mon->readsrc = 2; //hla
 
         ii_chk = new ii_checker("ii_chk");
         ii_chk->clk(sc_rst_if->clk);

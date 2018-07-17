@@ -1,40 +1,15 @@
 		SC VERIFICATION
-		Tue Jun 26 13:48:11 2018
+		Thu Jul 12 18:44:56 2018
 
 INFO@0 s: [ii_test_fixed] Constructor
 INFO@0 s: [ii_test_fixed] Start Reset Phase
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[0](DUT) = 1 - data_out[0](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[1](DUT) = 3 - data_out[1](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[2](DUT) = 6 - data_out[2](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[3](DUT) = 10 - data_out[3](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[4](DUT) = 6 - data_out[4](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[5](DUT) = 14 - data_out[5](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[6](DUT) = 24 - data_out[6](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[7](DUT) = 36 - data_out[7](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[8](DUT) = 7 - data_out[8](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[9](DUT) = 17 - data_out[9](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[10](DUT) = 30 - data_out[10](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[11](DUT) = 46 - data_out[11](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[12](DUT) = 12 - data_out[12](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[13](DUT) = 28 - data_out[13](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[14](DUT) = 48 - data_out[14](RM) = 0
-ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[15](DUT) = 72 - data_out[15](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[0](DUT) = 1 - data_out[0](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[1](DUT) = 3 - data_out[1](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[2](DUT) = 6 - data_out[2](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[3](DUT) = 10 - data_out[3](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[4](DUT) = 6 - data_out[4](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[5](DUT) = 14 - data_out[5](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[6](DUT) = 24 - data_out[6](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[7](DUT) = 36 - data_out[7](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[8](DUT) = 7 - data_out[8](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[9](DUT) = 17 - data_out[9](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[10](DUT) = 30 - data_out[10](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[11](DUT) = 46 - data_out[11](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[12](DUT) = 12 - data_out[12](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[13](DUT) = 28 - data_out[13](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[14](DUT) = 48 - data_out[14](RM) = 0
-ERROR@11 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[15](DUT) = 72 - data_out[15](RM) = 0
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[0](DUT) = 0 - data_out[0](RM) = 9.0881e+223
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[9](DUT) = 0 - data_out[9](RM) = 1.10671e-321
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[10](DUT) = 0 - data_out[10](RM) = 4.74303e-322
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[12](DUT) = 0 - data_out[12](RM) = 9.43984e+170
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[13](DUT) = 0 - data_out[13](RM) = 4.09783e-80
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[14](DUT) = 0 - data_out[14](RM) = 2.43134e+232
+ERROR@10 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[15](DUT) = 0 - data_out[15](RM) = 1.99693e+161
 ERROR@12 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[0](DUT) = 1 - data_out[0](RM) = 0
 ERROR@12 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[1](DUT) = 3 - data_out[1](RM) = 0
 ERROR@12 ns: [ii_top_tb.ii_env.ii_chk] MISMATCH between DUT and Reference Model: data_out[2](DUT) = 6 - data_out[2](RM) = 0
@@ -76,5 +51,5 @@ INFO@14 ns: [ii_test_fixed] ##         ##     ##     ##      ##
 INFO@14 ns: [ii_test_fixed] ##         ##     ##     ##      ##       
 INFO@14 ns: [ii_test_fixed] ##         ##     ##  #########   ########
 INFO@14 ns: [ii_test_fixed]                                           
-ERROR@14 ns: [ii_test_fixed] Simiition completed with 64 errors!
+ERROR@14 ns: [ii_test_fixed] Simiition completed with 39 errors!
 INFO@14 ns: [ii_test_fixed] Start Finish Phase
