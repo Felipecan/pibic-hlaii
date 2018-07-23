@@ -9,6 +9,8 @@
 #include "tlm.h"
 
 #include "VirtualBusFederate.h"
+#include <algorithm>    // std::all_of
+
 
 using namespace std;
 using namespace tlm;
@@ -130,7 +132,8 @@ void ii_monitor::copy_if_sqi()
     {        
         if(src == readsrc)
         {
-            if(count < 11 && src == 2)   
+            //if(count < 11 && src == 2)   
+            if( std::all_of(data, data+DATA_SIZE, [](unsigned index_){return index_== 0;}) )
             {
                 count++;
                 ii_sqi->data_valid  = 0;
