@@ -4,7 +4,7 @@ SET_WAVEFORM = 0
 BLOCK_PATH = $$PWD/..
 BLOCK_TB = $(BLOCK_PATH)/verification
 
-CC=g++ -std=c++11
+CC=g++ 
 
 CERTI = -DRTI_USES_STD_FSTREAM -I$$CERTI_HOME/include/hla13 -I$$CERTI_HOME/include/libhla -L$$CERTI_HOME/lib 
 CERTI_FLAGS = -lRTI-NGd -lFedTimed -lHLAd -lCERTId 

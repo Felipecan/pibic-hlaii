@@ -57,7 +57,7 @@ int main( int argc, char **argv )
                 //for(int aux = 0; aux < 16; aux++) std::cout << "data[" << aux << "] " << data[aux] << std::endl;
                 //send data by HLA
                 addr = SENDER_ID; //Sender address
-                a[0][0] = data[0];
+                a[0][0] = data[0] ;
                 a[0][1] = data[1] ;
                 a[0][2] = data[2] ;
                 a[0][3] = data[3] ;
@@ -88,7 +88,7 @@ int main( int argc, char **argv )
                         a[i][j] += a[i-1][j]+a[i][j-1]-a[i-1][j-1];
 
 
-                data[0]  = a[0][0]+1;
+                data[0]  = a[0][0];
                 data[1]  = a[0][1];
                 data[2]  = a[0][2];
                 data[3]  = a[0][3];

@@ -5,6 +5,7 @@
 #include "FederateAmbassador.h"
 #include "VirtualBusFederate.h"
 #include <string>
+#include <sstream>
 #include <unistd.h>
 
 
@@ -42,6 +43,7 @@ void VirtualBusFederate::writeData(unsigned src, unsigned addr, unsigned size, u
 bool VirtualBusFederate::readData(unsigned& source, unsigned& addr, unsigned& size, unsigned *data){
 	if(fedamb->hasReceivedData_from_src(source)){
 		fedamb->getReceivedData(source, addr, size, data);
+        // std::cout << "readData -> data[13]=" << data[13] << " data[14]=" << data[14] << std::endl;
 		return true;
 	}
 	else
@@ -776,28 +778,124 @@ void VirtualBusFederate::updateAttributeValues(unsigned src, unsigned addr, unsi
 
     if(strcmp(federateName, "Env") == 0)
     {
+        string s;
+        stringstream ss;
 	    RTI::AttributeHandleValuePairSet *attributes = RTI::AttributeSetFactory::create( 20 );
         // RTI::AttributeHandleValuePairSet *attributes2 = RTI::AttributeSetFactory::create( 20 );
 
-        attributes->add( srcHandle_all, (char*)&src, (RTI::ULong)sizeof(unsigned));
-        attributes->add( addrHandle_all, (char*)&addr, (RTI::ULong)sizeof(unsigned));
-        attributes->add( sizeHandle_all, (char*)&size, (RTI::ULong)sizeof(unsigned));
-        attributes->add( data0Handle_all, (char*)&data[0], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data1Handle_all, (char*)&data[1], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data2Handle_all, (char*)&data[2], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data3Handle_all, (char*)&data[3], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data4Handle_all, (char*)&data[4], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data5Handle_all, (char*)&data[5], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data6Handle_all, (char*)&data[6], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data7Handle_all, (char*)&data[7], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data8Handle_all, (char*)&data[8], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data9Handle_all, (char*)&data[9], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data10Handle_all, (char*)&data[10], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data11Handle_all, (char*)&data[11], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data12Handle_all, (char*)&data[12], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data13Handle_all, (char*)&data[13], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data14Handle_all, (char*)&data[14], (RTI::ULong)sizeof(unsigned));
-        attributes->add( data15Handle_all, (char*)&data[15], (RTI::ULong)sizeof(unsigned));  
+        ss << src;
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());  
+        attributes->add( srcHandle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << addr;
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( addrHandle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << size;
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( sizeHandle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[0];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data0Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[1];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data1Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[2];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data2Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[3];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data3Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[4];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data4Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[5];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data5Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[6];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data6Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[7];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data7Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[8];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data8Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[9];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data9Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[10];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data10Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[11];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data11Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[12];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data12Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[13];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data13Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[14];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data14Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[15];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes->add( data15Handle_all, s.c_str(), (RTI::ULong)sizeof(s.size()+1));  
 
         // attributes2->add( srcHandle_ref, (char*)&src, (RTI::ULong)sizeof(unsigned));
         // attributes2->add( addrHandle_ref, (char*)&addr, (RTI::ULong)sizeof(unsigned));
@@ -807,7 +905,7 @@ void VirtualBusFederate::updateAttributeValues(unsigned src, unsigned addr, unsi
         // attributes2->add( data2Handle_ref, (char*)&data[2], (RTI::ULong)sizeof(unsigned));
         // attributes2->add( data3Handle_ref, (char*)&data[3], (RTI::ULong)sizeof(unsigned));
         // attributes2->add( data4Handle_ref, (char*)&data[4], (RTI::ULong)sizeof(unsigned));
-        // attributes2->add( data5Handle_ref, (char*)&data[5], (RTI::ULong)sizeof(unsigned));
+        // attributes2->add( data5Handle_ref, s.c_str(), (RTI::ULong)sizeof(unsigned));
         // attributes2->add( data6Handle_ref, (char*)&data[6], (RTI::ULong)sizeof(unsigned));
         // attributes2->add( data7Handle_ref, (char*)&data[7], (RTI::ULong)sizeof(unsigned));
         // attributes2->add( data8Handle_ref, (char*)&data[8], (RTI::ULong)sizeof(unsigned));
@@ -829,27 +927,124 @@ void VirtualBusFederate::updateAttributeValues(unsigned src, unsigned addr, unsi
 
     if(strcmp(federateName, "1") == 0)
     {           
+        string s;
+        stringstream ss;
         RTI::AttributeHandleValuePairSet *attributes1 = RTI::AttributeSetFactory::create( 20 );
 
-        attributes1->add( srcHandle_dut, (char*)&src, (RTI::ULong)sizeof(unsigned));
-        attributes1->add( addrHandle_dut, (char*)&addr, (RTI::ULong)sizeof(unsigned));
-        attributes1->add( sizeHandle_dut, (char*)&size, (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data0Handle_dut, (char*)&data[0], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data1Handle_dut, (char*)&data[1], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data2Handle_dut, (char*)&data[2], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data3Handle_dut, (char*)&data[3], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data4Handle_dut, (char*)&data[4], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data5Handle_dut, (char*)&data[5], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data6Handle_dut, (char*)&data[6], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data7Handle_dut, (char*)&data[7], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data8Handle_dut, (char*)&data[8], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data9Handle_dut, (char*)&data[9], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data10Handle_dut, (char*)&data[10], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data11Handle_dut, (char*)&data[11], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data12Handle_dut, (char*)&data[12], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data13Handle_dut, (char*)&data[13], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data14Handle_dut, (char*)&data[14], (RTI::ULong)sizeof(unsigned));
-        attributes1->add( data15Handle_dut, (char*)&data[15], (RTI::ULong)sizeof(unsigned)); 
+
+        ss << src;
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( srcHandle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << addr;
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( addrHandle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << size;
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( sizeHandle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[0];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data0Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[1];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data1Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[2];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data2Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[3];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data3Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[4];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data4Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[5];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data5Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[6];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data6Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[7];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data7Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[8];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data8Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[9];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data9Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[10];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data10Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[11];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data11Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[12];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data12Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[13];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data13Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[14];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data14Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[15];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes1->add( data15Handle_dut, s.c_str(), (RTI::ULong)sizeof(s.size()+1)); 
 
         RTIfedTime time = fedamb->federateTime + fedamb->federateLookahead;
         rtiamb->updateAttributeValues(oHandle_dut, *attributes1, time, federateName ); 
@@ -859,27 +1054,123 @@ void VirtualBusFederate::updateAttributeValues(unsigned src, unsigned addr, unsi
 
     if(strcmp(federateName, "2") == 0)
     {
+        string s;
+        stringstream ss;
         RTI::AttributeHandleValuePairSet *attributes2 = RTI::AttributeSetFactory::create( 20 );
 
-        attributes2->add( srcHandle_ref, (char*)&src, (RTI::ULong)sizeof(unsigned));
-        attributes2->add( addrHandle_ref, (char*)&addr, (RTI::ULong)sizeof(unsigned));
-        attributes2->add( sizeHandle_ref, (char*)&size, (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data0Handle_ref, (char*)&data[0], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data1Handle_ref, (char*)&data[1], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data2Handle_ref, (char*)&data[2], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data3Handle_ref, (char*)&data[3], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data4Handle_ref, (char*)&data[4], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data5Handle_ref, (char*)&data[5], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data6Handle_ref, (char*)&data[6], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data7Handle_ref, (char*)&data[7], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data8Handle_ref, (char*)&data[8], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data9Handle_ref, (char*)&data[9], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data10Handle_ref, (char*)&data[10], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data11Handle_ref, (char*)&data[11], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data12Handle_ref, (char*)&data[12], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data13Handle_ref, (char*)&data[13], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data14Handle_ref, (char*)&data[14], (RTI::ULong)sizeof(unsigned));
-        attributes2->add( data15Handle_ref, (char*)&data[15], (RTI::ULong)sizeof(unsigned)); 
+        ss << src;
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( srcHandle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << addr;
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( addrHandle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << size;
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( sizeHandle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[0];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data0Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[1];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data1Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[2];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data2Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[3];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data3Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[4];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data4Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[5];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data5Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[6];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data6Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[7];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data7Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[8];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data8Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[9];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data9Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[10];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data10Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[11];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data11Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[12];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data12Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[13];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data13Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+
+        ss << data[14];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data14Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1));
+        
+        ss << data[15];
+        s = ss.str();
+        ss.clear();
+        ss.str(std::string());
+        attributes2->add( data15Handle_ref, s.c_str(), (RTI::ULong)sizeof(s.size()+1)); 
 
         RTIfedTime time = fedamb->federateTime + fedamb->federateLookahead;
         rtiamb->updateAttributeValues(oHandle_ref, *attributes2, time, federateName ); 

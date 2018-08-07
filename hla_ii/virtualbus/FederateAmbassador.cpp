@@ -29,6 +29,17 @@ FederateAmbassador::FederateAmbassador(char* federateName)
 	this->receivedData_1  = false;
 	this->receivedData_2  = false;
 
+	this->source_ = 0; this->source_1 = 0; this->source_2 = 0;
+	this->address_ = 0; this->address_1 = 0; this->address_2 = 0;
+	this->size_ = 0; this->size_1 = 0; this->size_2 = 0;
+
+	for(unsigned int i = 0; i < 16; i++)
+	{
+		this->data_[i] = 0;
+		this->data_1[i] = 0;
+		this->data_2[i] = 0;
+	}
+
 }
 
 FederateAmbassador::~FederateAmbassador()
@@ -298,252 +309,113 @@ void FederateAmbassador::reflectAttributeValues( RTI::ObjectHandle theObject,
 //	  return;
 //	}
 
+	stringstream ss;
 	RTI::ULong length;
 	unsigned s;
 	
-	unsigned* src = new unsigned[1];
-	theAttributes.getValue(0,(char*)src,length);
-	s = *src;
-	// printf("%i\n", s);
+	length = theAttributes.getValueLength(0);
+	char* src = theAttributes.getValuePointer(0, length);
+	ss << src;
+	ss >> s;
+	ss.clear();
+	ss.str(std::string());
+	//printf("AMBASSADOR SEM IF %s\n", src);
+
 	if(s == 0)
 	{	
+		//printf("AMBASSADOR %i\n", s);
 		source_ = s;
 
-		unsigned* addr = new unsigned[1];
-		theAttributes.getValue(1,(char*)addr,length);		
-		address_ = *addr;
+		length = theAttributes.getValueLength(1);
+		char* addr = theAttributes.getValuePointer(1, length);
+		ss << addr;
+		ss >> address_;
+		ss.clear();
+		ss.str(std::string());
 						
-		unsigned* sz = new unsigned[1];
-		theAttributes.getValue(2,(char*)sz,length);
-		size_ = *sz;
+		length = theAttributes.getValueLength(2);
+		char* sz = theAttributes.getValuePointer(2, length);
+		ss << sz;
+		ss >> size_;
+		ss.clear();
+		ss.str(std::string());
 
 		// cout << "Recebendo dados " << endl;
-
-		unsigned* dt0 = new unsigned[1];
-		theAttributes.getValue(3,(char*)dt0,length);
-		data_[0] = *dt0;
-		// cout << data[0] << endl;
-		unsigned* dt1 = new unsigned[1];
-		theAttributes.getValue(4,(char*)dt1,length);
-		data_[1] = *dt1;
-		
-		unsigned* dt2 = new unsigned[1];
-		theAttributes.getValue(5,(char*)dt2,length);
-		data_[2] = *dt2;
-		
-		unsigned* dt3 = new unsigned[1];
-		theAttributes.getValue(6,(char*)dt3,length);
-		data_[3] = *dt3;
-		
-		unsigned* dt4 = new unsigned[1];
-		theAttributes.getValue(7,(char*)dt4,length);
-		data_[4] = *dt4;
-
-		unsigned* dt5 = new unsigned[1];
-		theAttributes.getValue(8,(char*)dt5,length);
-		data_[5] = *dt5;
-
-		unsigned* dt6 = new unsigned[1];
-		theAttributes.getValue(9,(char*)dt6,length);
-		data_[6] = *dt6;
-
-		unsigned* dt7 = new unsigned[1];
-		theAttributes.getValue(10,(char*)dt7,length);
-		data_[7] = *dt7;
-
-		unsigned* dt8 = new unsigned[1];
-		theAttributes.getValue(11,(char*)dt8,length);
-		data_[8] = *dt8;
-
-		unsigned* dt9 = new unsigned[1];
-		theAttributes.getValue(12,(char*)dt9,length);
-		data_[9] = *dt9;
-
-		unsigned* dt10 = new unsigned[1];
-		theAttributes.getValue(13,(char*)dt10,length);
-		data_[10] = *dt10;
-
-		unsigned* dt11 = new unsigned[1];
-		theAttributes.getValue(14,(char*)dt11,length);
-		data_[11] = *dt11;
-
-		unsigned* dt12 = new unsigned[1];
-		theAttributes.getValue(15,(char*)dt12,length);
-		data_[12] = *dt12;
-
-		unsigned* dt13 = new unsigned[1];
-		theAttributes.getValue(16,(char*)dt13,length);
-		data_[13] = *dt13;
-
-		unsigned* dt14 = new unsigned[1];
-		theAttributes.getValue(17,(char*)dt14,length);
-		data_[14] = *dt14;
-
-		unsigned* dt15 = new unsigned[1];
-		theAttributes.getValue(18,(char*)dt15,length);
-		data_[15] = *dt15;
+		for(unsigned int i = 0; i < 16; i++)
+		{
+			length = theAttributes.getValueLength(i+3);
+			char* dt = theAttributes.getValuePointer(i+3, length);		
+			ss << dt;
+			ss >> data_[i];
+			ss.clear();
+			ss.str(std::string());
+		}		
 
 		receivedData_ =  true;  
 	}
 
 	if(s == 1)
 	{
+		//printf("AMBASSADOR %i\n", s);
 		source_1 = s;
 
-		unsigned* addr = new unsigned[1];
-		theAttributes.getValue(1,(char*)addr,length);		
-		address_1 = *addr;
+		length = theAttributes.getValueLength(1);
+		char* addr = theAttributes.getValuePointer(1, length);
+		ss << addr;
+		ss >> address_1;
+		ss.clear();
+		ss.str(std::string());
 						
-		unsigned* sz = new unsigned[1];
-		theAttributes.getValue(2,(char*)sz,length);
-		size_1 = *sz;
+		length = theAttributes.getValueLength(2);
+		char* sz = theAttributes.getValuePointer(2, length);
+		ss << sz;
+		ss >> size_1;
+		ss.clear();
+		ss.str(std::string());
 
 		// cout << "Recebendo dados " << endl;
+		for(unsigned int i = 0; i < 16; i++)
+		{
+			length = theAttributes.getValueLength(i+3);
+			char* dt = theAttributes.getValuePointer(i+3, length);		
+			ss << dt;
+			ss >> data_1[i];
+			ss.clear();
+			ss.str(std::string());
+		}		
 
-		unsigned* dt0 = new unsigned[1];
-		theAttributes.getValue(3,(char*)dt0,length);
-		data_1[0] = *dt0;
-		// cout << data[0] << endl;
-		unsigned* dt1 = new unsigned[1];
-		theAttributes.getValue(4,(char*)dt1,length);
-		data_1[1] = *dt1;
-		
-		unsigned* dt2 = new unsigned[1];
-		theAttributes.getValue(5,(char*)dt2,length);
-		data_1[2] = *dt2;
-		
-		unsigned* dt3 = new unsigned[1];
-		theAttributes.getValue(6,(char*)dt3,length);
-		data_1[3] = *dt3;
-		
-		unsigned* dt4 = new unsigned[1];
-		theAttributes.getValue(7,(char*)dt4,length);
-		data_1[4] = *dt4;
-
-		unsigned* dt5 = new unsigned[1];
-		theAttributes.getValue(8,(char*)dt5,length);
-		data_1[5] = *dt5;
-
-		unsigned* dt6 = new unsigned[1];
-		theAttributes.getValue(9,(char*)dt6,length);
-		data_1[6] = *dt6;
-
-		unsigned* dt7 = new unsigned[1];
-		theAttributes.getValue(10,(char*)dt7,length);
-		data_1[7] = *dt7;
-
-		unsigned* dt8 = new unsigned[1];
-		theAttributes.getValue(11,(char*)dt8,length);
-		data_1[8] = *dt8;
-
-		unsigned* dt9 = new unsigned[1];
-		theAttributes.getValue(12,(char*)dt9,length);
-		data_1[9] = *dt9;
-
-		unsigned* dt10 = new unsigned[1];
-		theAttributes.getValue(13,(char*)dt10,length);
-		data_1[10] = *dt10;
-
-		unsigned* dt11 = new unsigned[1];
-		theAttributes.getValue(14,(char*)dt11,length);
-		data_1[11] = *dt11;
-
-		unsigned* dt12 = new unsigned[1];
-		theAttributes.getValue(15,(char*)dt12,length);
-		data_1[12] = *dt12;
-
-		unsigned* dt13 = new unsigned[1];
-		theAttributes.getValue(16,(char*)dt13,length);
-		data_1[13] = *dt13;
-
-		unsigned* dt14 = new unsigned[1];
-		theAttributes.getValue(17,(char*)dt14,length);
-		data_1[14] = *dt14;
-
-		unsigned* dt15 = new unsigned[1];
-		theAttributes.getValue(18,(char*)dt15,length);
-		data_1[15] = *dt15;
-
-		receivedData_1 =  true;  
+		receivedData_1 =  true;  		
 	}
 
 	if(s == 2)
 	{
+		//printf("AMBASSADOR %i\n", s);
 		source_2 = s;
 
-		unsigned* addr = new unsigned[1];
-		theAttributes.getValue(1,(char*)addr,length);		
-		address_2 = *addr;
+		length = theAttributes.getValueLength(1);
+		char* addr = theAttributes.getValuePointer(1, length);
+		ss << addr;
+		ss >> address_2;
+		ss.clear();
+		ss.str(std::string());
 						
-		unsigned* sz = new unsigned[1];
-		theAttributes.getValue(2,(char*)sz,length);
-		size_2 = *sz;
+		length = theAttributes.getValueLength(2);
+		char* sz = theAttributes.getValuePointer(2, length);
+		ss << sz;
+		ss >> size_2;
+		ss.clear();
+		ss.str(std::string());
 
 		// cout << "Recebendo dados " << endl;
-
-		unsigned* dt0 = new unsigned[1];
-		theAttributes.getValue(3,(char*)dt0,length);
-		data_2[0] = *dt0;
-		// cout << data[0] << endl;
-		unsigned* dt1 = new unsigned[1];
-		theAttributes.getValue(4,(char*)dt1,length);
-		data_2[1] = *dt1;
-		
-		unsigned* dt2 = new unsigned[1];
-		theAttributes.getValue(5,(char*)dt2,length);
-		data_2[2] = *dt2;
-		
-		unsigned* dt3 = new unsigned[1];
-		theAttributes.getValue(6,(char*)dt3,length);
-		data_2[3] = *dt3;
-		
-		unsigned* dt4 = new unsigned[1];
-		theAttributes.getValue(7,(char*)dt4,length);
-		data_2[4] = *dt4;
-
-		unsigned* dt5 = new unsigned[1];
-		theAttributes.getValue(8,(char*)dt5,length);
-		data_2[5] = *dt5;
-
-		unsigned* dt6 = new unsigned[1];
-		theAttributes.getValue(9,(char*)dt6,length);
-		data_2[6] = *dt6;
-
-		unsigned* dt7 = new unsigned[1];
-		theAttributes.getValue(10,(char*)dt7,length);
-		data_2[7] = *dt7;
-
-		unsigned* dt8 = new unsigned[1];
-		theAttributes.getValue(11,(char*)dt8,length);
-		data_2[8] = *dt8;
-
-		unsigned* dt9 = new unsigned[1];
-		theAttributes.getValue(12,(char*)dt9,length);
-		data_2[9] = *dt9;
-
-		unsigned* dt10 = new unsigned[1];
-		theAttributes.getValue(13,(char*)dt10,length);
-		data_2[10] = *dt10;
-
-		unsigned* dt11 = new unsigned[1];
-		theAttributes.getValue(14,(char*)dt11,length);
-		data_2[11] = *dt11;
-
-		unsigned* dt12 = new unsigned[1];
-		theAttributes.getValue(15,(char*)dt12,length);
-		data_2[12] = *dt12;
-
-		unsigned* dt13 = new unsigned[1];
-		theAttributes.getValue(16,(char*)dt13,length);
-		data_2[13] = *dt13;
-
-		unsigned* dt14 = new unsigned[1];
-		theAttributes.getValue(17,(char*)dt14,length);
-		data_2[14] = *dt14;
-
-		unsigned* dt15 = new unsigned[1];
-		theAttributes.getValue(18,(char*)dt15,length);
-		data_2[15] = *dt15;
+		for(unsigned int i = 0; i < 16; i++)
+		{
+			length = theAttributes.getValueLength(i+3);
+			char* dt = theAttributes.getValuePointer(i+3, length);		
+			ss << dt;
+			ss >> data_2[i];
+			ss.clear();
+			ss.str(std::string());
+		}		
 
 		receivedData_2 =  true;  
 	}

@@ -29,7 +29,8 @@ SC_MODULE(ii_monitor)
     VirtualBusFederate *federate;
     unsigned src;
     unsigned addr;
-    unsigned int size, data[16];
+    unsigned size;
+    unsigned data[16];    
     unsigned readsrc;
     unsigned cntrl_write;
     unsigned count = 0;
@@ -77,6 +78,9 @@ SC_MODULE(ii_monitor)
         ii_sqi_clone = new ii_sequence_item("ii_sqi_clone"); //Necessary to avoid overwrite
 	
 	    ii_if = sc_if;
+
+        for(unsigned int del_index = 0; del_index < 16; del_index++)
+            data[del_index] = 0;
         //----------------------------
         // Process registration
         //----------------------------
@@ -132,8 +136,15 @@ void ii_monitor::copy_if_sqi()
     {        
         if(src == readsrc)
         {
+            bool zeros = true;
+            for(unsigned int i = 0; i < 16; i++)
+            {
+                //std::cout << "SRC " << src << " Compare data[" << i << "]=" << data[i] << std::endl;
+                if(data[i] != 0) {zeros = false; break;}
+            }    
             //if(count < 11 && src == 2)   
-            if( std::all_of(data, data+DATA_SIZE, [](unsigned index_){return index_== 0;}) )
+            //if( std::all_of(data, data+DATA_SIZE, [](unsigned index_){return index_== 0;}) )
+            if(zeros)
             {
                 count++;
                 ii_sqi->data_valid  = 0;
@@ -151,8 +162,7 @@ void ii_monitor::copy_if_sqi()
                 file_data_out << std::endl;
             }
             else
-            {
-                ii_sqi->data_valid  = 1;
+            {                
                 msg << "data from src=readsrc " << src;
                 // cout << msg.str() << endl;
                 INFO(name(), msg.str().c_str(), HIGH);
@@ -160,7 +170,7 @@ void ii_monitor::copy_if_sqi()
 
                 for(int i = 0; i < DATA_SIZE; i++) 
                 {                
-                    ii_sqi->data_out[i] = (unsigned int)data[i]; // ?
+                    ii_sqi->data_out[i] = (unsigned int)data[i]; 
                     msg << "Read: out_data " << i << " = " << ii_sqi->data_out[i];
                     // cout << msg.str() << endl;
                     INFO(name(), msg.str().c_str(), HIGH);
@@ -170,6 +180,7 @@ void ii_monitor::copy_if_sqi()
                 }
 
                 file_data_out << std::endl;
+                ii_sqi->data_valid  = 1;
             }
         
         }
