@@ -35,7 +35,7 @@ int main( int argc, char **argv )
 	//Data to receive
 	unsigned src;
 	unsigned addr;
-	int a[IMAGE_HEIGHT][IMAGE_WIDTH];
+	unsigned a[IMAGE_HEIGHT][IMAGE_WIDTH];
     unsigned readsrc;
     unsigned cntrl_write;
     

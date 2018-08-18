@@ -10,7 +10,7 @@
 #define WINDOW_WIDTH 3
 #define WINDOW_HEIGHT 36
 	//Use to HLA
-unsigned int  size;
+unsigned int size;
 unsigned int data[VIRTUALBUS_SIZE];
 
 
@@ -38,7 +38,7 @@ int main( int argc, char **argv )
     unsigned readsrc;
     unsigned cntrl_write;
 	
-	int a[IMAGE_HEIGHT][IMAGE_WIDTH];
+	unsigned a[IMAGE_HEIGHT][IMAGE_WIDTH];
 
 	while(1)
 	{

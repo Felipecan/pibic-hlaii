@@ -17,6 +17,8 @@ using namespace std;
 #include <sys/types.h>
 #include <stdlib.h>
 #include <string>
+// #include <chrono>
+// using namespace std::chrono;
 using namespace std;
 
 #include <report_server.h>
@@ -58,6 +60,7 @@ verbosity_type report_server::report::verbosity;
 
 int sc_main(int argc, char *argv[])
 {
+    // high_resolution_clock::time_point t1 = high_resolution_clock::now();
     //-----------------------------
     // Initial Time
     //-----------------------------
@@ -180,7 +183,11 @@ int sc_main(int argc, char *argv[])
     SC_REPORT_INFO(main_ID,"Start Simiition...");
     sc_start(II_TIMEOUT,II_TIMEUNIT);
     SC_REPORT_INFO(main_ID,"End Simiition...");
-  
+    
+    // high_resolution_clock::time_point t2 = high_resolution_clock::now();
+    // auto duration = duration_cast<milliseconds>( t2 - t1 ).count();
+    // cout << "time: " << duration << endl;
+
     return 0;
 }
 
